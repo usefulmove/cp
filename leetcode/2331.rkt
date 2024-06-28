@@ -1,0 +1,8 @@
+(define (evaluate-tree root)
+  (case (tree-node-val root)
+    ((0) #f)
+    ((1) #t)
+    ((2) (or (evaluate-tree (tree-node-left root))
+             (evaluate-tree (tree-node-right root))))
+    ((3) (and (evaluate-tree (tree-node-left root))
+              (evaluate-tree (tree-node-right root))))))

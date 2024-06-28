@@ -1,0 +1,7 @@
+(defun flatten (nested)
+  (let ((head (car nested))
+        (rest (cdr nested)))
+    (cond ((null nested) '())
+          ((listp head) (append (flatten head)
+                                (flatten rest)))
+          (t (cons head (flatten rest))))))
