@@ -8,8 +8,8 @@
                              (low (first sorted-nums))
                              (high (last sorted-nums)))
                          (iter
-                          (take (drop sorted-nums 1) (- n 2))
-                          (cons (/ (+ low high) 2.0) acc)))))))
+                          (take (drop sorted-nums 1) (- n 2)) ; update nums
+                          (cons (* 0.5 (+ low high)) acc))))))) ; update acc
     (apply min
      (iter (sort nums <) '()))))
 
