@@ -12,17 +12,28 @@
 
 
 (define (sort-jumbled mapping nums)
-  (let ((convert-num (lambda (num)
-                       (map
-                        (lambda (c)
-                          (let ((digit (- (char->integer c)
-                                          (char->integer #\0))))
-                            (list-ref mapping digit)))
-                        (string->list (number->string num))))))
-    (map car (sort
-              (zip
-               nums
-               (map convert-num nums))
+  (let ((map-num (lambda (num)
+                   (let ((digits (map
+                                  (lambda (c)
+                                    (- (char->integer c)
+                                       (char->integer #\0)))
+                                  (string->list (number->string num)))))
+                     (foldl
+                      (lambda (pair acc)
+                        (let ((index (car pair))
+                              (converted-digit (cadr pair)))
+                          (+ acc
+                             (* converted-digit (expt 10 index)))))
+                      0
+                      (zip
+                       (range (length digits))
+                       (reverse (map
+                                 (lambda (digit)
+                                   (list-ref mapping digit))
+                                 digits)))))))
+        ((mapped-nums (map map-num nums))))
+    (map car (sort ; sort pairs by mapped nums
+              (zip nums mapped-nums) ; pairs
               (lambda (pair-1 pair-2)
                 (< (cadr pair-1)
                    (cadr pair-2)))))))
