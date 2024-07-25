@@ -2,7 +2,8 @@
   (let ((convert-num (lambda (num)
                        (map
                         (lambda (c)
-                          (let ((digit (todo c)))
+                          (let ((digit (- (char->integer c)
+                                          (char->integer #\0))))
                             (list-ref mapping digit)))
                         (string->list (number->string num))))))
     (map car (sort
