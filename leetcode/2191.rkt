@@ -1,3 +1,16 @@
+(define (any? f lst)
+  (cond ((null? lst) #f)
+        ((f (car lst)) #t)
+        (else (any? f (cdr lst)))))
+
+
+(define (zip . lsts)
+  (cond ((null? lsts) '())
+        ((any? identity (map null? lsts)) '())
+        (else (cons (map car lsts)
+                    (apply zip (map cdr lsts)))))) 
+
+
 (define (sort-jumbled mapping nums)
   (let ((convert-num (lambda (num)
                        (map
@@ -11,4 +24,5 @@
                nums
                (map convert-num nums))
               (lambda (pair-1 pair-2)
-                (< (cadr pair-1) (cadr pair-2)))))))
+                (< (cadr pair-1)
+                   (cadr pair-2)))))))
