@@ -12,25 +12,31 @@
 
 
 (define (sort-jumbled mapping nums)
-  (let* ((map-num (lambda (num)
-                    (let ((digits (map
-                                   (lambda (c)
-                                     (- (char->integer c)
-                                        (char->integer #\0)))
-                                   (string->list (number->string num)))))
-                      (foldl
-                       (lambda (pair acc)
-                         (let ((index (car pair))
-                               (converted-digit (cadr pair)))
-                           (+ acc (* converted-digit (expt 10 index)))))
-                       0
-                       (zip
-                        (range (length digits))
-                        (reverse (map
-                                  (lambda (digit)
-                                    (list-ref mapping digit))
-                                  digits)))))))
-         (mapped-nums (map map-num nums))
+  (let* ((map-number (lambda (num) ; int -> int
+                       (let* ((char->digit (lambda (c)
+                                             (- (char->integer c)
+                                                (char->integer #\0))))
+                              (number->digits (lambda (num)
+                                                (let ((chars (string->list (number->string num))))
+                                                  (map char->digit chars))))
+                              (digits->number (lambda (digits)
+                                                (let ((enumerated-digits (zip
+                                                                          (range (length digits)) ; index
+                                                                          (reverse digits)))) ; digit
+                                                  (foldl
+                                                   (lambda (pair acc)
+                                                     (let ((index (car pair))
+                                                           (digit (cadr pair)))
+                                                       (+ acc (* digit (expt 10 index)))))
+                                                   0
+                                                   enumerated-digits))))
+                              (digits (number->digits num))
+                              (mapped-digits (map
+                                              (lambda (digit)
+                                                (list-ref mapping digit))
+                                              digits)))
+                         (digits->number mapped-digits))))
+         (mapped-nums (map map-number nums))
          (map-pairs (zip nums mapped-nums))
          (sorted-pairs (sort ; sort map pairs by mapped nums
                         map-pairs
