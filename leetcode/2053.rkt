@@ -4,15 +4,13 @@
   (letrec ((get-distincts (lambda (lst)
                             (if (null? lst)
                                 '()
-                                (if (not (member ; if car is not duplicated in rest of list (if distinct)
-                                          (car lst)
-                                          (cdr lst)))
-                                    (cons (car lst)
-                                          (get-distincts (cdr lst)))
-                                    (get-distincts (filter
-                                                    (lambda (e)
-                                                      (not (equal? e (car lst))))
-                                                    (cdr lst)))))))
+                                (let ((first (car lst))
+                                      (rest (cdr lst)))
+                                  (if (member first rest)
+                                      (get-distincts (filter
+                                                      (lambda (e) (not (equal? e first)))
+                                                      rest))
+                                      (cons first (get-distincts rest)))))))
            (distincts (get-distincts arr)))
     (if (> k (length distincts))
         ""
