@@ -1,17 +1,17 @@
 #lang racket
 
 (define (kth-distinct arr k)
-  (letrec ((get-distincts (lambda (lst)
-                            (if (null? lst)
-                                '()
-                                (let ((first (car lst))
-                                      (rest (cdr lst)))
-                                  (if (member first rest)
-                                      (get-distincts (filter
-                                                      (lambda (e) (not (equal? e first)))
-                                                      rest))
-                                      (cons first (get-distincts rest)))))))
-           (distincts (get-distincts arr)))
+  (letrec ((keep-distincts (lambda (lst)
+                             (cond ((null? lst) '())
+                                   (else (let ((fst (car lst))
+                                               (rst (cdr lst)))
+                                           (if (member fst rst)
+                                               (keep-distincts (filter-not
+                                                                (lambda (e)
+                                                                  (equal? e fst))
+                                                                rst))
+                                               (cons fst (keep-distincts rst))))))))
+           (distincts (keep-distincts arr)))
     (if (> k (length distincts))
         ""
         (list-ref distincts (- k 1)))))
