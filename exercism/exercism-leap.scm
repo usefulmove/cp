@@ -1,4 +1,5 @@
 (define (leap-year? year)
-  (or (zero? (modulo year 400))
-      (and (not (zero? (modulo year 100)))
-           (zero? (modulo year 4)))))
+  (let ((divisible-by? (lambda (n) (zero? (modulo year n)))))
+    (or (divisible-by? 400)
+        (and (divisible-by? 4)
+             (not (divisible-by? 100))))))
