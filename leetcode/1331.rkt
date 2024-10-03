@@ -1,17 +1,15 @@
 #lang racket
 
-(define (array-rank-transform vals)
-  (let* ((sorted-vals (remove-duplicates (sort vals <)))
-         (value-rank-assoc (map
-                            cons
-                            sorted-vals
-                            (range 1 (+ 1 (length sorted-vals)))))
-         (value-rank-hash (make-hash value-rank-assoc)))
+(define (array-rank-transform values)
+  (let* ((sorted-values (remove-duplicates (sort values <)))
+         (value-rank-hash (make-hash (map
+                                      cons
+                                      sorted-values
+                                      (range 1 (+ 1 (length sorted-values)))))))
     (map
      (lambda (value)
-       #;(cdr (assoc value value-rank-assoc))
        (hash-ref value-rank-hash value))
-     vals)))
+     values)))
 
 (array-rank-transform '(100 100 100))
 (array-rank-transform '(100 200 300))
