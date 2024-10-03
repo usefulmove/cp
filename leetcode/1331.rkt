@@ -5,10 +5,12 @@
          (value-rank-assoc (map
                             cons
                             sorted-vals
-                            (range 1 (+ 1 (length sorted-vals))))))
+                            (range 1 (+ 1 (length sorted-vals)))))
+         (value-rank-hash (make-hash value-rank-assoc)))
     (map
      (lambda (value)
-       (cdr (assoc value value-rank-assoc)))
+       #;(cdr (assoc value value-rank-assoc))
+       (hash-ref value-rank-hash value))
      vals)))
 
 (array-rank-transform '(100 100 100))
