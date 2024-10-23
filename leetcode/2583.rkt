@@ -25,7 +25,5 @@
 
     (if (> k (length level-sums))
         -1
-        (let ((sorted-sums (sort
-                            (map cdr level-sums)
-                            >)))
+        (let ((sorted-sums (sort (map cdr level-sums) >)))
           (list-ref sorted-sums (- k 1))))))
