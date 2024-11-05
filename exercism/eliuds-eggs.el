@@ -1,11 +1,11 @@
 (defun int-to-binary (n)
   (if (<= n 0)
       "0"
-    (let ((result ""))
+    (let ((output ""))
       (while (> n 0)
-        (setq result (concat (number-to-string (% n 2)) result)
-              n (/ n 2)))
-      result)))
+        (setq output (concat (number-to-string (% n 2)) output))
+        (setq n (/ n 2)))
+      output)))
 
 (defun egg-count (number)
   (seq-reduce
