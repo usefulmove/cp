@@ -3,10 +3,10 @@
 (define (maximum-beauty items queries)
   (map
    (lambda (query)
-     (apply max (filter-map
+     (apply max (map
                  (lambda (item)
-                   (let ((price (car item))
-                         (beauty (cadr item)))
+                   (let ((price (first item))
+                         (beauty (second item)))
                      (if (<= price query)
                          beauty
                          0)))
