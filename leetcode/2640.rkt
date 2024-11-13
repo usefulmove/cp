@@ -2,25 +2,24 @@
 
 
 (define (find-prefix-score nums)
-  (let ((conversion-array (let loop ((lst nums)
+  (let ((conversion-list (let loop ((lst nums)
                                      (max-so-far 0)
                                      (result '()))
                             (if (empty? lst)
                                 (reverse result)
                                 (let* ((current-num (car lst))
-                                       (new-max (max max-so-far current-num))
-                                       (converted (+ current-num new-max)))
+                                       (updated-max (max max-so-far current-num))
+                                       (converted (+ current-num updated-max)))
                                   (loop
                                    (cdr lst)
-                                   new-max
+                                   updated-max
                                    (cons converted result)))))))
-    (let loop ((lst conversion-array)
+    (let loop ((lst conversion-list)
                (sum-so-far 0)
                (result '()))
       (if (empty? lst)
           (reverse result)
-          (let* ((n (car lst))
-                 (update (+ n sum-so-far)))
+          (let* ((update (+ sum-so-far (car lst))))
             (loop
              (cdr lst)
              update
@@ -28,7 +27,7 @@
 
 
 (define (find-prefix-score nums)
-  (let ((conversion-array (cdr (foldl
+  (let ((conversion-list (cdr (foldl
                                 (lambda (num acc)
                                   (let* ((max-so-far (car acc))
                                          (prefixes (cdr acc))
@@ -46,4 +45,4 @@
                   (rest lst)))))
     (scanl
      +
-     conversion-array)))
+     conversion-list)))
