@@ -19,13 +19,14 @@
                (result '()))
       (if (empty? lst)
           (reverse result)
-          (let* ((update (+ sum-so-far (car lst))))
+          (let* ((updated-sum (+ sum-so-far (car lst))))
             (loop
              (cdr lst)
-             update
-             (cons update result)))))))
+             updated-sum
+             (cons updated-sum result)))))))
 
 
+; using folds (slower)
 (define (find-prefix-score nums)
   (let ((conversion-list (cdr (foldl
                                 (lambda (num acc)
