@@ -3,20 +3,21 @@
 (provide balanced?)
 
 (define (balanced? str)
-  (let ((cleaned-str (list->string 
-                      (filter
-                       (lambda (c)
-                         (member c (string->list "(){}[]")))
-                       (string->list str))))
-        (reduce (lambda (str)
-                  ((compose
-                    (lambda (s)
-                      (string-replace s "()" ""))
-                    (lambda (s)
-                      (string-replace s "{}" ""))
-                    (lambda (s)
-                      (string-replace s "[]" "")))
-                   str))))
-    (let ((reduced-str (reduce cleaned-str)))
-      (cond ((string=? reduced-str cleaned-str) (string=? "" reduced-str))
-            (else (balanced? reduced-str))))))
+  (let* ((cleaned-str (list->string 
+                       (filter
+                        (lambda (c)
+                          (member c (string->list "(){}[]")))
+                        (string->list str))))
+         (string-remove (lambda (rem)
+                          (lambda (s)
+                            (string-replace s rem ""))))
+         (reduce (lambda (str)
+                   ((compose
+                     (string-remove "()")
+                     (string-remove "{}")
+                     (string-remove "[]"))
+                    str)))
+         (reduced-str (reduce cleaned-str)))
+    (if (string=? reduced-str cleaned-str) ; converged (won't reduce)
+        (string=? "" reduced-str) ; check for empty string
+        (balanced? reduced-str)))) ; continue reduction
