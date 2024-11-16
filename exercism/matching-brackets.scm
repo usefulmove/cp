@@ -2,43 +2,43 @@
 
 
 (define (balanced? string)
-  (let ((normalized-string (list->string 
-                         (filter
-                          (lambda (char)
-                            (member char (string->list "(){}[]")))
-                          (string->list string)))))
-    (let ((reduced-string (reduce-string normalized-string)))
-      (cond ((string=? reduced-string normalized-string) ; converged?
-             (string=? "" reduced-string)) ; fully reduced?
-            (else (balanced? reduced-string))))))
+  (let* ((normalized-string (list->string 
+                             (filter
+                              (lambda (char)
+                                (member char (string->list "(){}[]")))
+                              (string->list string))))
+         (reduced-string (reduce-string normalized-string)))
+    (if (string=? reduced-string normalized-string) ; converged?
+        (string=? "" reduced-string) ; fully reduced?
+        (balanced? reduced-string))))
 
 
 (define reduce-string
   (lambda (string)
-           (if (equal? "" string)
-               ""
-               (letrec* ((remove-bracket-pairs
-                         (lambda (pairs)
-                           (cond ((null? pairs) '())
-                                 ((= 1 (length pairs)) (map car pairs))
-                                 (else 
-                                  (let* ((first-pair (car pairs))
-                                         (char (car first-pair))
-                                         (char-next (cadr first-pair)))
-                                    (if (or (and (equal? char #\{)
-                                                 (equal? char-next #\}))
-                                            (and (equal? char #\()
-                                                 (equal? char-next #\)))
-                                            (and (equal? char #\[)
-                                                 (equal? char-next #\])))
-                                        (remove-bracket-pairs (drop 2 pairs))
-                                        (cons char
-                                              (remove-bracket-pairs (cdr pairs)))))))))
-                        (chars (string->list string))
-                        (currents-and-nexts (zip chars ; (current . next)
-                                                 (append (cdr chars) (list #\_)))))
-                 (list->string
-                  (remove-bracket-pairs currents-and-nexts))))))
+    (if (equal? "" string)
+        ""
+        (letrec* ((remove-bracket-pairs
+                  (lambda (pairs)
+                    (cond ((null? pairs) '())
+                          ((= 1 (length pairs)) (map car pairs))
+                          (else 
+                           (let* ((first-pair (car pairs))
+                                  (char (car first-pair))
+                                  (char-next (cadr first-pair)))
+                             (if (or (and (equal? char #\{)
+                                          (equal? char-next #\}))
+                                     (and (equal? char #\()
+                                          (equal? char-next #\)))
+                                     (and (equal? char #\[)
+                                          (equal? char-next #\])))
+                                 (remove-bracket-pairs (drop 2 pairs))
+                                 (cons char
+                                       (remove-bracket-pairs (cdr pairs)))))))))
+                 (chars (string->list string))
+                 (currents-and-nexts (zip chars ; (current . next)
+                                          (append (cdr chars) (list #\_)))))
+          (list->string
+           (remove-bracket-pairs currents-and-nexts))))))
 
 
 (define (zip . lsts)
