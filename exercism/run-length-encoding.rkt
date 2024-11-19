@@ -43,9 +43,6 @@
   (let loop ((chars (string->list code))
              (repetitions -1)
              (encoded-chars '()))
-    (println chars)
-    (println repetitions)
-    (println encoded-chars)
     (if (empty? chars)
         (apply string (reverse encoded-chars))
         (let ((current-char (car chars))
@@ -81,3 +78,5 @@
 #;(decode "abcde")
 #;(decode "a3bcde")
 #;(decode "12wb12w3b24wb")
+
+#;(decode (encode "wwwwwwwwwwwwbwwwwwwwwwwwwbbbwwwwwwwwwwwwwwwwwwwwwwwwb"))
