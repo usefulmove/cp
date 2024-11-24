@@ -8,10 +8,10 @@
       (if (empty? cs)
           (reverse output)
           (let ((char-to-match (car cs)))
-            (if (empty? output-head)
+            (if (empty? output)
                 (loop cs
                       (cons (list #\`) output))
-                (let (todo todo)
+                (let ((output-head (car otput)))
                   todo)))))))
 
 (string-sequence "abc") ; ("a" "aa" "ab" "aba" "abb" "abc")
