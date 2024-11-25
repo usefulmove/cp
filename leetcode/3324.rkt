@@ -1,30 +1,46 @@
 #lang racket
 
 (define (string-sequence target)
-  (let ((next-char (lambda (c) (integer->char
-                                (+ (char->integer c) 1)))))
+  (let ((next-c (lambda (c)
+                 (integer->char (+ (char->integer c) 1)))))
     (let loop ((cs (string->list target))
                (output '())
                (add-depth 1))
+      (println "loop:")
+      (print "cs: ")
       (println cs)
+      (print "output: ")
       (println output)
+      (print "add-depth: ")
       (println add-depth)
-      (if (empty? cs)
-          (reverse output)
-          (let ((char-to-match (car cs)))
-            (if (empty? output)
-                (loop cs
-                      (cons (list #a`) output)
-                      add-depth)
-                (let ((output-head (car output)))
-                  (if (<= (length (car output))
+      (if (= add-depth 10) '()
+          (if (empty? cs)
+              (map
+               (lambda (lst)
+                 (apply string (reverse lst)))
+               (reverse (cdr output)))
+              (let ((c-to-match (car cs)))
+                (print "c-to-match: ")
+                (println c-to-match)
+                (if (empty? output)
+                    (loop cs
+                          (cons (list #\a) output)
                           add-depth)
-                      (loop todo
-                            todo
-                            todo)
-                      (loop cs
-                            (cons (cons #\a output-head) output)
-                            (+ add-depth 1))))))))))
+                    (let ((output-head (car output)))
+                      (if (< (length output-head)
+                             add-depth)
+                          (loop cs
+                                (cons (cons #\a output-head) output)
+                                (+ add-depth 1))
+                          (let ((curr-c (car output-head)))
+                            (if (equal? curr-c c-to-match)
+                                (loop (cdr cs)
+                                      (cons (cons #\a output-head) output)
+                                      (+ add-depth 1))
+                                (loop cs
+                                      (cons (cons (next-c curr-c) (cdr output-head))
+                                            output)
+                                      add-depth))))))))))))
 
 (string-sequence "ab") ; ("a" "aa" "ab")
-#;(string-sequence "abc") ; ("a" "aa" "ab" "aba" "abb" "abc")
+(string-sequence "abc") ; ("a" "aa" "ab" "aba" "abb" "abc")
