@@ -34,4 +34,5 @@
 
 #;(string-sequence "ab") ; ("a" "aa" "ab")
 #;(string-sequence "abc") ; ("a" "aa" "ab" "aba" "abb" "abc")
-(string-sequence "aaaaaaaaaa") ; '("a" "aa" "aaa" "aaaa" "aaaaa" "aaaaaa" "aaaaaaa" "aaaaaaaa" "aaaaaaaaa" "aaaaaaaaaa")
+#;(string-sequence "aaaaaaaaaa")
+  ; '("a" "aa" "aaa" "aaaa" "aaaaa" "aaaaaa" "aaaaaaa" "aaaaaaaa" "aaaaaaaaa" "aaaaaaaaaa")
