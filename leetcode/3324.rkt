@@ -32,7 +32,9 @@
                                         output)
                                   add-depth)))))))))))
 
-#;(string-sequence "ab") ; ("a" "aa" "ab")
-#;(string-sequence "abc") ; ("a" "aa" "ab" "aba" "abb" "abc")
+#;(string-sequence "ab") ; => ("a" "aa" "ab")
+#;(string-sequence "abc") ; => ("a" "aa" "ab" "aba" "abb" "abc")
 #;(string-sequence "aaaaaaaaaa")
-  ; '("a" "aa" "aaa" "aaaa" "aaaaa" "aaaaaa" "aaaaaaa" "aaaaaaaa" "aaaaaaaaa" "aaaaaaaaaa")
+  ; => '("a" "aa" "aaa" "aaaa" "aaaaa" "aaaaaa" "aaaaaaa" "aaaaaaaa" "aaaaaaaaa" "aaaaaaaaaa")
+#;(string-sequence "he")
+  ; => ("a" "b" "c" "d" "e" "f" "g" "h" "ha" "hb" "hc" "hd" "he")
