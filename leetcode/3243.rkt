@@ -30,4 +30,4 @@
 
 #;(shortest-distance-after-queries 5 '((2 4) (0 2) (0 4)))
 #;(shortest-distance-after-queries 4 '((0 3) (0 2)))
-(shortest-distance-after-queries 5 '((1 3) (2 4)))
+(shortest-distance-after-queries 5 '((1 3) (2 4))) ; fails - should be => '(3 3)
