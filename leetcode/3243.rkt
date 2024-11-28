@@ -3,7 +3,7 @@
 (define (shortest-distance-after-queries n queries)
   (letrec ((city-pairs (map
                         (lambda (a)
-                          (cons a (list (+ a 1))))
+                          (list a (+ a 1)))
                         (range n)))
            (distance (lambda (cps acc)
                        (cond ((empty? cps) acc)
@@ -31,7 +31,8 @@
                                        (from (first query))
                                        (to (second query)))
                                    (if (= city from)
-                                       (cons city (cons to roads))
+                                       (cons city
+                                             (cons to roads))
                                        cp)))
                                cps)))
             (loop (cdr qs)
