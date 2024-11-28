@@ -1,9 +1,30 @@
 #lang racket
 
+;; city pairs data structure
+;; '((0 . (1)) (1 . (2)) (2 . (3)) (3 . (4)) (4 . (5))) ; initial structure
+;; '((0 . (1)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (2 4)
+;; '((0 . (1 2)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 2)
+;; '((0 . (1 2 4)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 4)
+;; '((0 . (1 2 4)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 4)
+
 (define (shortest-distance-after-queries n queries)
-  (let ((city-pairs (map
-                     (lambda (a) (cons a 1))
-                     (range n))))
+  (letrec ((city-pairs (map
+                        (lambda (a)
+                          (cons a (list (+ a 1))))
+                        (range n)))
+           (distance (lambda (cps acc)
+                       (cond ((empty? cps) acc)
+                             ((= (- n 1) (car (car cps))) acc)
+                             (else (apply min (map
+                                               (lambda (destination)
+                                                 (distance
+                                                  (let loop ((pairs cps))
+                                                    (let ((city (car (car pairs))))
+                                                      (if (= destination city)
+                                                          pairs
+                                                          (loop (cdr pairs)))))
+                                                  (+ 1 acc)))
+                                               (cdr (car cps)))))))))
     (let loop ((qs queries)
                (cps city-pairs)
                (output '()))
@@ -11,23 +32,20 @@
           (reverse output)
           (let* ((query (car qs))
                  (updated-cps (map
-                               (lambda (city-pair)
-                                 (let ((city (car city-pair))
-                                       (on-off (cdr city-pair))
+                               (lambda (cp)
+                                 (let ((city (car cp))
+                                       (roads (cdr cp))
                                        (from (first query))
                                        (to (second query)))
-                                   (if (and (> city from)
-                                            (< city to))
-                                       (cons city 0)
-                                       city-pair)))
+                                   (if (= city from)
+                                       (cons city (cons to roads))
+                                       cp)))
                                cps)))
-            (println query)
-            (println updated-cps)
             (loop (cdr qs)
                   updated-cps
-                  (cons (- (apply + (map cdr updated-cps)) 1)
+                  (cons (distance updated-cps 0)
                         output)))))))
 
-#;(shortest-distance-after-queries 5 '((2 4) (0 2) (0 4)))
-#;(shortest-distance-after-queries 4 '((0 3) (0 2)))
-(shortest-distance-after-queries 5 '((1 3) (2 4))) ; fails - should be => '(3 3)
+(shortest-distance-after-queries 5 '((2 4) (0 2) (0 4))) ; => '(3 2 1)
+(shortest-distance-after-queries 4 '((0 3) (0 2))) ; => '(1 1)
+(shortest-distance-after-queries 5 '((1 3) (2 4))) ; => '(3 3)
