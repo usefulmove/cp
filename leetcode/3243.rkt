@@ -1,12 +1,5 @@
 #lang racket
 
-;; city pairs data structure
-;; '((0 . (1)) (1 . (2)) (2 . (3)) (3 . (4)) (4 . (5))) ; initial structure
-;; '((0 . (1)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (2 4)
-;; '((0 . (1 2)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 2)
-;; '((0 . (1 2 4)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 4)
-;; '((0 . (1 2 4)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 4)
-
 (define (shortest-distance-after-queries n queries)
   (letrec ((city-pairs (map
                         (lambda (a)
@@ -46,6 +39,16 @@
                   (cons (distance updated-cps 0)
                         output)))))))
 
+#|
+    city pairs data structure
+    '((0 . (1))     (1 . (2)) (2 . (3))   (3 . (4)) (4 . (5))) ; initial structure
+    '((0 . (1))     (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (2 4)
+    '((0 . (1 2))   (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 2)
+    '((0 . (1 2 4)) (1 . (2)) (2 . (3 4)) (3 . (4)) (4 . (5))) ; after adding (0 4)
+    '((0 1 2 4)     (1 2)     (2 3 4)     (3 4)     (4 5)))    ; same as above
+|#
+
 (shortest-distance-after-queries 5 '((2 4) (0 2) (0 4))) ; => '(3 2 1)
 (shortest-distance-after-queries 4 '((0 3) (0 2))) ; => '(1 1)
 (shortest-distance-after-queries 5 '((1 3) (2 4))) ; => '(3 3)
+
