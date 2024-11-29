@@ -2,11 +2,10 @@
 
 (define (deck-revealed-increasing deck)
   (let* ((sorted-deck (sort deck <))
-         (len (length deck))
          (top-to-bottom (lambda (lst)
                           (append (cdr lst)
                                   (list (car lst)))))
-         (inds (let loop ((is (range len))
+         (inds (let loop ((is (range (length deck)))
                           (out '()))
                  (if (empty? is)
                      (reverse out)
