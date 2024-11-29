@@ -1,0 +1,36 @@
+#lang racket
+
+(define (deck-revealed-increasing deck)
+  (let* ((sorted-deck (sort deck <))
+         (len (length deck))
+         (top-to-bottom (lambda (lst)
+                          (append (cdr lst)
+                                  (list (car lst)))))
+         (inds (let loop ((is (range len))
+                          (out '()))
+                 (if (empty? is)
+                     (reverse out)
+                     (if (= (length is) 1)
+                         (loop '()
+                               (cons (car is) out))
+                         (loop (top-to-bottom (cdr is))
+                               (cons (car is) out))))))
+         (zipped (let loop ((is inds)
+                            (ns sorted-deck)
+                            (out '()))
+                   (if (empty? is)
+                       out
+                       (loop (cdr is)
+                             (cdr ns)
+                             (cons (cons (car is)
+                                         (car ns))
+                                   out)))))
+         (index-pairs (sort
+                       zipped
+                       (lambda (pair-1 pair-2)
+                         (< (car pair-1)
+                            (car pair-2))))))
+    (map cdr index-pairs)))
+
+(deck-revealed-increasing '(17 13 11 2 3 5 7)) ; => (2 13 3 11 5 17 7)
+(deck-revealed-increasing '(1 1000)) ; => (1 1000)
