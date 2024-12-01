@@ -33,4 +33,4 @@
                       (cdr chars-b)
                       (+ result 1))))))
 
-(hamming-distance "GAGCCTACTAACGGGAT" "CATCGTAATGACGGCCT") ; => 7
+(hamming-distance "GAGCCTACTAACGGGAT" "CATCGTAATGACGGCCT")
