@@ -19,5 +19,5 @@
                   (cdr ss)
                   ss)))))
 
-(add-spaces "LeetcodeHelpsMeLearn" '(8 13 15))
-(add-spaces "spaces" (range 7))
+(add-spaces "LeetcodeHelpsMeLearn" '(8 13 15)) ; => "Leetcode Helps Me Learn"
+(add-spaces "spaces" (range 7)) ; => " s p a c e s"
