@@ -6,9 +6,10 @@
   (let* ((char->digit (lambda (c) (- (char->integer c)
                                      (char->integer #\0))))
          (digits (map char->digit (string->list
-                                   (number->string n)))))
+                                   (number->string n))))
+         (num-digits (length digits)))
     (= n (foldl
           (lambda (digit acc)
-            (+ acc (expt digit (length digits))))
+            (+ acc (expt digit num-digits)))
           0
           digits))))
