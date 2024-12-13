@@ -1,12 +1,5 @@
 #lang racket
 
-(define (enumerate lst . params)
-  (let ((index (if (not (null? params)) (car params) 0)))
-    (cond ((null? lst) '())
-          (else (cons (cons index
-                            (car lst))
-                      (enumerate (cdr lst) (+ index 1)))))))
-
 (define (find-score nums)
   (letrec ((nums-pairs (let loop ((ns nums)
                                   (output '()))
@@ -43,16 +36,22 @@
                                              min-so-far-index))))))
                  (min-marked-index (car min-pair))
                  (minimum (cdr min-pair))
-                 (updated-nps (map
-                               (lambda (enum-pair)
-                                 (let ((ind (car enum-pair))
-                                       (pair (cdr enum-pair)))
-                                   (if (or (= ind min-marked-index)
-                                           (= ind (+ min-marked-index 1))
-                                           (= ind (- min-marked-index 1)))
-                                       (cons (car pair) #t)
-                                       pair)))
-                               (enumerate nps))))
+                 (updated-nps (let loop ((ps nps)
+                                         (ind 0)
+                                         (output '()))
+                                (if (empty? ps)
+                                    (reverse output)
+                                    (let ((num (caar ps))
+                                          (marked (cdar ps)))
+                                      (loop (cdr ps)
+                                            (+ ind 1)
+                                            (cons (cons num
+                                                        (if (or (= ind min-marked-index)
+                                                                (= ind (+ min-marked-index 1))
+                                                                (= ind (- min-marked-index 1)))
+                                                            #t
+                                                            marked))
+                                                  output)))))))
             (loop updated-nps
                   (+ score minimum)))))))
 
