@@ -1,21 +1,24 @@
 #lang racket
 
 (define (is-array-special nums queries)
-  (let ((special? (lambda (l)
-                    (let loop ((ns l)
-                               (output #t)
-                               (parity (= 0 (remainder (car l) 2))))
-                      (if (empty? ns)
-                          output
-                          (loop (cdr ns)
-                                (and (equal? parity
-                                             (= 0 (remainder (car ns) 2))) output)
-                                (not parity)))))))
+  (let* ((parities (map
+                    (lambda (n)
+                      (= 0 (remainder n 2)))
+                    nums))
+         (special? (lambda (l)
+                     (let loop ((ps l)
+                                (output #t)
+                                (parity (car l)))
+                       (if (empty? ps)
+                           output
+                           (loop (cdr ps)
+                                 (and (equal? parity (car ps)) output)
+                                 (not parity)))))))
     (map
      (lambda (q)
        (let* ((from (first q))
               (to (second q))
-              (sub (drop (take nums (+ to 1)) from)))
+              (sub (drop (take parities (+ to 1)) from)))
          (special? sub)))
      queries)))
 
