@@ -6,17 +6,15 @@
                                   (ind 0)
                                   (min-ind 0)
                                   (min-so-far 2e32))
-                         (if (empty? ns)
-                             min-ind
-                             (if (< (car ns) min-so-far)
-                                 (loop (cdr ns)
-                                       (+ ind 1)
-                                       ind
-                                       (car ns))
-                                 (loop (cdr ns)
-                                       (+ ind 1)
-                                       min-ind
-                                       min-so-far))))))
+                         (cond ((empty? ns) min-ind)
+                               ((< (car ns) min-so-far) (loop (cdr ns)
+                                                              (+ ind 1)
+                                                              ind
+                                                              (car ns)))
+                               (else (loop (cdr ns)
+                                           (+ ind 1)
+                                           min-ind
+                                           min-so-far))))))
         (update-nums (lambda (ns ind)
                        (append (take ns ind)
                                (list (* multiplier (list-ref ns ind)))
