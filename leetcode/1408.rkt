@@ -3,14 +3,14 @@
 (define (string-matching words)
   (filter
    (lambda (word)
-     (let loop ((ws words)
-                (res #f))
-       (if (empty? ws)
-           res
-           (let ((w (car ws)))
-             (loop (cdr ws)
-                   (or res (and (not (equal? w word))
-                                (string-contains? w word))))))))
+     (let loop ((comps words)
+                (result #f))
+       (if (empty? comps)
+           result
+           (let ((comparison (car comps)))
+             (loop (cdr comps)
+                   (or result (and (not (equal? comparison word))
+                                (string-contains? comparison word))))))))
    words))
 
 (string-matching '("mass" "as" "hero" "superhero"))
