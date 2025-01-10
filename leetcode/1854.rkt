@@ -19,7 +19,18 @@
                              (+ 1 (- 2050 1950))
                              (lambda (_) 0))))
       (if (empty? ls)
-          (+ 1950 (index-of populations (apply max populations)))
+          (+ 1950 (let loop ((index 0)
+                             (max-so-far 0)
+                             (index-at-max 0))
+                    (if (= (+ index 1950) 2051)
+                        index-at-max
+                        (if (> (list-ref populations index) max-so-far)
+                            (loop (+ index 1)
+                                  (list-ref populations index)
+                                  index)
+                            (loop (+ index 1)
+                                  max-so-far
+                                  index-at-max)))))
           (loop (cdr ls)
                 (update-populations (car ls) populations))))))
 
