@@ -22,5 +22,5 @@
                                              (is-subset-word? (car words) word))))))))
     (filter is-universal? words1)))
 
-(word-subsets '("amazon" "apple" "facebook" "google" "leetcode") '("e" "o"))
-(word-subsets '("amazon" "apple" "facebook" "google" "leetcode") '("l" "e"))
+(word-subsets '("amazon" "apple" "facebook" "google" "leetcode") '("e" "o")) ; => '("facebook" "google" "leetcode")
+(word-subsets '("amazon" "apple" "facebook" "google" "leetcode") '("l" "e")) ; => '("apple" "google" "leetcode")
