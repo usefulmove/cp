@@ -21,8 +21,10 @@
      (lambda (c1 c2 acc)
        (cond ((not (equal? acc "")) acc)
              ((equal? c1 c2) acc)
-             ((and (= (get-count c1) (char->value c1))
-                   (= (get-count c2) (char->value c2))) (list->string (list c1 c2)))
+             ((and (= (get-count c1)
+                      (char->value c1))
+                   (= (get-count c2)
+                      (char->value c2))) (list->string (list c1 c2)))
              (else acc)))
      ""
      (take chars (- (length chars) 1))
