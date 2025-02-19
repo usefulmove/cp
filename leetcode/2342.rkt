@@ -29,10 +29,12 @@
          max-so-far))))
 
 (define (sum-digits n)
-  (let loop ((n (abs n)) (sum 0))
+  (let loop ((n (abs n))
+             (sum 0))
     (if (zero? n)
         sum
-        (loop (quotient n 10) (+ sum (remainder n 10))))))
+        (loop (quotient n 10)
+              (+ sum (remainder n 10))))))
 
 
 (maximum-sum '(18 43 36 13 7))
