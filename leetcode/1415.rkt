@@ -9,9 +9,8 @@
             ((empty? out) (for ((c cs))
                             (loop (cons c out))))
             (else (for ((c cs))
-                    (if (equal? c (car out))
-                        (void)
-                        (loop (cons c out)))))))
+                    (unless (equal? c (car out))
+                      (loop (cons c out)))))))
     (let ((cnt (length happy-strings)))
       (if (> k cnt)
           ""
