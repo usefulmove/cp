@@ -1,0 +1,30 @@
+#lang racket
+
+(define (merge-arrays nums1 nums2)
+  (let loop ((as nums1)
+             (bs nums2)
+             (output '()))
+    (cond ((and (empty? as)
+                (empty? bs)) (reverse output))
+          ((empty? as) (loop '()
+                             (cdr bs)
+                             (cons (car bs) output)))
+          ((empty? bs) (loop (cdr as)
+                             '()
+                             (cons (car as) output)))
+          ((= (caar as)
+              (caar bs)) (loop (cdr as)
+                               (cdr bs)
+                               (cons (list (caar as)
+                                           (+ (cadar as)
+                                              (cadar bs)))
+                                     output)))
+          ((< (caar as)
+              (caar bs)) (loop (cdr as)
+                               bs
+                               (cons (car as) output)))
+          (else (loop as
+                      (cdr bs)
+                      (cons (car bs) output))))))
+
+(merge-arrays '((1 2) (2 3) (4 5)) '((1 4) (3 2) (4 1))) ; => '((1 6) (2 3) (3 2) (4 6))
