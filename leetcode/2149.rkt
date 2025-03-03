@@ -1,7 +1,8 @@
 #lang racket
 
 (define (rearrange-array nums)
-  (let-values (((positives negatives) (partition positive? nums)))
+  (let-values (((positives negatives)
+                (partition positive? nums)))
     (foldr
      (lambda (pos neg acc)
        (append (list pos neg) acc))
