@@ -1,16 +1,20 @@
 #lang racket
 
 (define (rearrange-array nums)
+  (let-values (((positives negatives) (partition positive? nums)))
+    (foldr
+     (lambda (pos neg acc)
+       (append (list pos neg) acc))
+     '()
+     positives
+     negatives)))
+
+#;(define (rearrange-array nums)
   (let loop ((ns nums)
              (pos-sign #t)
              (negs '())
              (poss '())
              (output '()))
-    (print ns)
-    (print pos-sign)
-    (print negs)
-    (print poss)
-    (println output)
     (cond ((and (empty? ns)
                 (empty? negs)
                 (empty? poss)) (reverse output))
