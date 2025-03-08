@@ -7,19 +7,19 @@
                          ((even? n) #f)
                          (else
                           (let loop ((i 3))
-                            (cond
-                              ((> (* i i) n) #t)
-                              ((zero? (remainder n i)) #f)
-                              (else (loop (+ i 2)))))))))
+                            (cond ((> (* i i) n) #t)
+                                  ((zero? (remainder n i)) #f)
+                                  (else (loop (+ i 2)))))))))
          (primes (filter
                   prime?
-                  (range left (add1 right)))))
+                  (range left (add1 right))))
+         (no-solution '(-1 -1)))
     (if (< (length primes) 2)
-        '(-1 -1)
+        no-solution
         (let loop ((as (take primes (sub1 (length primes))))
                    (bs (cdr primes))
                    (smallest-gap 10e6)
-                   (output '(-1 -1)))
+                   (output no-solution))
           (cond ((empty? as) output)
                 ((< (- (car bs) (car as)) smallest-gap)
                  (loop (cdr as)
