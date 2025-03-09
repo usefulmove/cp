@@ -3,19 +3,18 @@
 (define (largest-values root)
   (letrec ((vals '())
            (evaluate (lambda (node level)
-                       (if (tree-node? node)
-                           (begin
-                             (set! vals (cons (cons
-                                               level
-                                               (tree-node-val node))
-                                              vals))
-                             (evaluate
-                              (tree-node-left node)
-                              (add1 level))
-                             (evaluate
-                              (tree-node-right node)
-                              (add1 level)))
-                           (void)))))
+                       (when (tree-node? node)
+                        (begin
+                          (set! vals (cons (cons
+                                            level
+                                            (tree-node-val node))
+                                           vals))
+                          (evaluate
+                           (tree-node-left node)
+                           (add1 level))
+                          (evaluate
+                           (tree-node-right node)
+                           (add1 level)))))))
     (evaluate root 0)
     (if (empty? vals)
         '()
