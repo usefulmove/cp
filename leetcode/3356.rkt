@@ -10,25 +10,31 @@
                           (from (car query))
                           (to (cadr query))
                           (limit (caddr query)))
-                      (println ns)
                       (if (zeros? ns)
                           acc
                           (cons (add1 k)
-                                (reverse (foldl
-                                          (lambda (n acc-inner)
+                                (let loop ((as ns)
+                                           (index 0)
+                                           (out '()))
+                                  (if (empty? as)
+                                      (reverse out)
+                                      (loop (cdr as)
+                                            (add1 index)
                                             (cons
-                                             (cond ((zero? n) 0)
-                                                   ((>= n limit) (- n limit))
-                                                   (else 0))
-                                             acc-inner))
-                                          '()
-                                          ns))))))
+                                             (if (and (>= index from)
+                                                      (<= index to))
+                                                 (cond ((zero? (car as)) 0)
+                                                       ((>= (car as) limit)
+                                                        (- (car as) limit))
+                                                       (else 0))
+                                                 (car as))
+                                             out))))))))
                   (cons 0 nums)
                   queries))
          (k (car result))
          (out (cdr result)))
     (if (zeros? out) k -1)))
 
-(min-zero-array '(2 0 2) '((0 2 1) (0 2 1) (1 1 3)))
-(min-zero-array '(4 3 2 1) '((1 3 2) (0 2 1)))
-(min-zero-array '(8 4) '((0 1 5) (1 1 5) (1 1 3) (1 1 4) (0 0 3) (1 1 4) (0 1 2) (1 1 3) (1 1 1)))
+(min-zero-array '(2 0 2) '((0 2 1) (0 2 1) (1 1 3))) ; => 2
+(min-zero-array '(4 3 2 1) '((1 3 2) (0 2 1))) ; => -1
+(min-zero-array '(8 4) '((0 1 5) (1 1 5) (1 1 3) (1 1 4) (0 0 3) (1 1 4) (0 1 2) (1 1 3) (1 1 1))) ; => 5
