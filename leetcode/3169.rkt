@@ -1,26 +1,23 @@
 #lang racket
 
 (define (count-days days meetings)
-  (count
-   false?
-   (foldl
-    (lambda (meeting days-unavailable)
-      (let ((start (first meeting))
-            (end (second meeting)))
-        (let loop ((days days-unavailable)
-                   (index 0)
-                   (output '()))
-          (if (empty? days)
-              (reverse output)
-              (if (<= start (+ index 1) end)
-                  (loop (cdr days)
-                        (+ index 1)
-                        (cons #t output))
-                  (loop (cdr days)
-                        (+ index 1)
-                        (cons (car days) output)))))))
-    (make-list days #f) ; days unavailable
-    meetings)))
+  (count false? (foldl
+                 (lambda (meeting days-unavailable)
+                   (let ((start (first meeting))
+                         (end (second meeting)))
+                     (let loop ((days days-unavailable)
+                                (index 0)
+                                (output '()))
+                       (cond ((empty? days) (reverse output))
+                             ((<= start (+ index 1) end)
+                              (loop (cdr days)
+                                    (+ index 1)
+                                    (cons #t output)))
+                             (else (loop (cdr days)
+                                         (+ index 1)
+                                         (cons (car days) output)))))))
+                 (make-list days #f) ; days unavailable
+                 meetings)))
 
 (count-days 10 '((5 7) (1 3) (9 10))) ; => 2
 (count-days 5 '((2 4) (1 3))) ; => 1
