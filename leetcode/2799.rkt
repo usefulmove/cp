@@ -11,7 +11,8 @@
     (for ((i (range len)))
       (for ((j (range i len)))
         (when (= (count-distincts (sublist nums i j))
-                 distinct-nums) (set! cnt (add1 cnt)))))
+                 distinct-nums)
+          (set! cnt (add1 cnt)))))
     cnt))
 
 (count-complete-subarrays '(1 3 1 2 2)) ; => 4
