@@ -6,14 +6,11 @@
      (lambda (num)
        (let loop ((n num)
                   (ds digits))
-         (if (zero? n)
-             #t ; keep
-             (let ((digit (remainder n 10))
-                   (rest (quotient n 10)))
-               (if (member digit ds)
-                   (loop rest
-                         (remove digit ds))
-                   #f)))))
+         (let ((digit (remainder n 10)))
+           (cond ((zero? n)) ; keep?
+                 ((member digit ds) (loop (quotient n 10)
+                                          (remove digit ds)))
+                 (else #f)))))
      possibles)))
 
 (find-even-numbers '(2 1 3 0))
