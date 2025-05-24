@@ -1,0 +1,20 @@
+#lang racket
+
+(define (find-words-containing words x)
+  (-> (listof string?) char? (listof exact-integer?))
+  (letrec ((matches (map
+                     (lambda (s)
+                       (member x (string->list s)))
+                     words)))
+    (let loop ((ms matches)
+               (index 0)
+               (out '()))
+      (if (empty? ms)
+          (reverse out)
+          (if (car ms)
+              (loop (cdr ms)
+                    (add1 index)
+                    (cons index out))
+              (loop (cdr ms)
+                    (add1 index)
+                    out))))))
