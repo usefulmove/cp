@@ -1,7 +1,5 @@
 #lang racket
 
-(require racket/set)
-
 (define (maximum-unique-subarray nums)
   ; sliding window algorithm (recursive)
   (let* ((vec-nums (list->vector nums))
