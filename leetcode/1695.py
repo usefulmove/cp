@@ -1,7 +1,7 @@
 class Solution:
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
         # sliding window algorithm
-        scores = []
+        max_score = 0
         contains = set()
         i, j = 0, 0
         limit = len(nums)
@@ -11,10 +11,10 @@ class Solution:
 
             if not b in contains:
                 contains.add(b)
-                scores.append(sum(contains))
+                max_score = max(max_score, sum(contains))
                 j += 1
             else:
                 contains.discard(a)
                 i += 1
 
-        return max(scores)
+        return max_score
