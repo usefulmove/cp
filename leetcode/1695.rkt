@@ -3,7 +3,7 @@
 (require racket/set)
 
 (define (maximum-unique-subarray nums)
-  ; sliding window algorithm
+  ; sliding window algorithm (recursive)
   (let* ((vec-nums (list->vector nums))
          (limit (vector-length vec-nums)))
     (let recur ((i 0)
