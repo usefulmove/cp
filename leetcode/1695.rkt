@@ -1,6 +1,33 @@
 #lang racket
 
+(require racket/set)
+
 (define (maximum-unique-subarray nums)
+  ; sliding window algorithm
+  (let ((score 0)
+        (max-score 0)
+        (i 0)
+        (j 0)
+        (contains (set))
+        (limit (length nums)))
+    (do ((_ 0 (void)))
+        ((= j limit) max-score)
+      (begin
+        (let ((a (list-ref nums i))
+              (b (list-ref nums j)))
+          (if (set-member? contains b)
+              (begin
+                (set! contains (set-remove contains a))
+                (set! score (- score a))
+                (set! i (add1 i)))
+              (begin
+                (set! contains (set-add contains b))
+                (set! score (+ score b))
+                (set! max-score (max max-score score))
+                (set! j (add1 j)))))))
+    max-score))
+
+#;(define (maximum-unique-subarray nums)
   (let ((all-unique? (lambda (lst)
                        (= (length lst)
                           (length (remove-duplicates lst))))))
