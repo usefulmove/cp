@@ -1,5 +1,10 @@
 #lang racket
 
+#|
+Search for the last odd character, and return the string from the first
+character to that (last odd) character.
+|#
+
 #;(require srfi/13)
 #;(define (largest-odd-number num)
   (let* ((cs (string->list num))
