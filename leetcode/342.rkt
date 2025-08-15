@@ -7,6 +7,6 @@
                  (round (log n 4))))
          0.0000000000001)))
 
-(is-power-of-four 16)
-(is-power-of-four 5)
-(is-power-of-four 1)
+(is-power-of-four 16) ; => #t
+(is-power-of-four 5) ; => #f
+(is-power-of-four 1) ; => #t
