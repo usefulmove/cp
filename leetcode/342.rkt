@@ -1,0 +1,12 @@
+#lang racket
+
+(define (is-power-of-four n)
+  (if (<= n 0)
+      #f
+      (< (abs (- (log n 4)
+                 (round (log n 4))))
+         0.0000000000001)))
+
+(is-power-of-four 16)
+(is-power-of-four 5)
+(is-power-of-four 1)
