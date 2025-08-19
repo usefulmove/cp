@@ -1,6 +1,17 @@
 #lang racket
 
 (define (zero-filled-subarray nums)
+  (let loop ((ns nums) (cnt 0) (acc 0))
+    (cond ((empty? ns) acc)
+          ((zero? (car ns)) (let ((cnt* (+ cnt 1)))
+                              (loop (cdr ns)
+                                    cnt*
+                                    (+ acc cnt*))))
+          (else (loop (cdr ns)
+                      0 ; reset
+                      acc)))))
+
+#;(define (zero-filled-subarray nums)
   (let ((tng (lambda (a) ; triangular number
                (/ (* a (+ a 1)) 2))))
     (let loop ((ns nums) (cnt 0) (acc 0))
@@ -13,6 +24,20 @@
                         (+ acc (tng cnt))))))))
 
 #;(define (zero-filled-subarray nums)
+    (let loop ((ns nums) (cnt 0) (counts '()))
+      (cond ((empty? ns) (foldl
+                          (lambda (c acc)
+                            (+ acc (/ (* c (+ c 1)) 2)))
+                          0
+                          (cons cnt counts)))
+            ((zero? (car ns)) (loop (cdr ns)
+                                    (+ cnt 1)
+                                    counts))
+            (else (loop (cdr ns)
+                        0 ; reset
+                        (cons cnt counts))))))
+
+#;(define (zero-filled-subarray nums)
   (let loop ((ns nums) (cnt 0) (counts '()))
     (cond ((empty? ns) (let recur ((cnts (cons cnt counts))
                                    (out 0))
@@ -23,20 +48,6 @@
                                        (/ (* (car cnts)
                                              (+ (car cnts) 1))
                                           2))))))
-          ((zero? (car ns)) (loop (cdr ns)
-                                  (+ cnt 1)
-                                  counts))
-          (else (loop (cdr ns)
-                      0 ; reset
-                      (cons cnt counts))))))
-
-#;(define (zero-filled-subarray nums)
-  (let loop ((ns nums) (cnt 0) (counts '()))
-    (cond ((empty? ns) (foldl
-                        (lambda (c acc)
-                          (+ acc (/ (* c (+ c 1)) 2)))
-                        0
-                        (cons cnt counts)))
           ((zero? (car ns)) (loop (cdr ns)
                                   (+ cnt 1)
                                   counts))
