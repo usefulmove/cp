@@ -2,7 +2,7 @@
 
 (define (recover-order order friends)
   (filter
-   (lambda (e) (member e friends))
+   (lambda (id) (member id friends))
    order))
 
 (recover-order '(3 1 2 5 4) '(1 3 4)) ; => '(3 1 4)
