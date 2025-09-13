@@ -6,7 +6,6 @@
          (counter (lambda (lst)
                     (let loop ((cs chars)
                                (out '())) ; assoc list
-                      (displayln out)
                       (if (empty? cs)
                           (reverse out)
                           (let* ((c (car cs))
@@ -18,7 +17,16 @@
                                               (drop out (add1 ind)))
                                       (cons (cons c 1) out))))))))
          (counts (counter chars)))
-    counts))
+    (let loop ((cnts counts)
+               (max-vowel 0)
+               (max-consonant 0))
+      (cond ((empty? cnts) (+ max-vowel max-consonant))
+            ((vowel? (caar cnts)) (loop (cdr cnts)
+                                        (max max-vowel (cdar cnts))
+                                        max-consonant))
+            (else (loop (cdr cnts)
+                        max-vowel
+                        (max max-consonant (cdar cnts))))))))
 
-(max-freq-sum "successes")
-(max-freq-sum "aeiaeia")
+(max-freq-sum "successes") ; => 6
+(max-freq-sum "aeiaeia") ; => 3
