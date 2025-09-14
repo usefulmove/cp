@@ -1,9 +1,8 @@
 #lang racket
 
 (define (max-freq-sum s)
-  (let* ((chars (string->list s))
-         (vowel? (lambda (c) (member c '(#\a #\e #\i #\o #\u))))
-         (counts (let loop ((cs chars)
+  (let* ((vowel? (lambda (c) (member c '(#\a #\e #\i #\o #\u))))
+         (counts (let loop ((cs (string->list s))
                             (cnts '())) ; assoc list
                    (if (empty? cs)
                        (reverse cnts)
