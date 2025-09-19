@@ -1,16 +1,21 @@
 #lang racket
 
 (define (repeated-substring-pattern s)
-  (letrec ((n (string-length s))
-           (check-repeat (lambda (sub str)
+  (string-contains?
+   (substring (string-append s s) 1 (- (* (string-length s) 2) 1))
+   s))
+
+#;(define (repeated-substring-pattern s)
+  (letrec ((half-n (/ (string-length s) 2))
+           (repeats? (lambda (sub str)
                            (let ((reduced (string-replace str sub "")))
-                             (cond ((equal? reduced "") #t) ; fully reduced
+                             (cond ((equal? reduced "") #t) ; comp. reduced
                                    ((equal? reduced str) #f) ; doesn't reduce
-                                   (else (check-repeat sub reduced)))))))
+                                   (else (repeats? sub reduced)))))))
     (let loop ((sub-len 0))
-      (if (> sub-len (/ n 2))
+      (if (> sub-len half-n)
           #f
-          (or (check-repeat (substring s 0 sub-len) s)
+          (or (repeats? (substring s 0 sub-len) s)
               (loop (+ sub-len 1)))))))
 
 (repeated-substring-pattern "abab") ; => #t

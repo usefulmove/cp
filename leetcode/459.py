@@ -1,5 +1,9 @@
 class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
+        return s in (s + s)[1:-1]
+
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
         halfLen: int = len(s) // 2
 
         def doesRepeat(sub: str, st: str) -> bool:
