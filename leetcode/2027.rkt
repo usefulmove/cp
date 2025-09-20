@@ -10,6 +10,6 @@
                                        (+ moves 1)))
           (else (loop (cdr cs) moves)))))
 
-(minimum-moves "XXX")
-(minimum-moves "XXOX")
-(minimum-moves "OOOO")
+(minimum-moves "XXX") ; => 1
+(minimum-moves "XXOX") ; => 2
+(minimum-moves "OOOO") ; => 0
