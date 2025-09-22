@@ -30,10 +30,8 @@
                             (else (loop (cdr cnts)
                                         max-freq
                                         max-cnts))))))
-    (foldl
-     (lambda (cnt sum) (+ sum (cdr cnt)))
-     0
-     max-elems)))
+    (* (length max-elems)
+       (cdar max-elems))))
 
 (max-frequency-elements '(1 2 2 3 1 4))
 (max-frequency-elements '(1 2 3 4 5))
