@@ -1,0 +1,22 @@
+#lang racket
+
+(define (chunk nums size)
+  (let loop ((ns nums)
+             (out '(()))
+             (count 0))
+    (cond ((and (empty? ns)
+                (equal? out '(()))) '())
+          ((empty? ns) (reverse out))
+          ((< count size) (loop (cdr ns)
+                                (append (list (append (car out)
+                                                      (list (car ns))))
+                                        (cdr out))
+                                (+ count 1)))
+          (else (loop (cdr ns)
+                      (append (list (list (car ns))) out)
+                      1)))))
+
+(chunk '(1 2 3 4 5) 1) ; => '((1) (2) (3) (4) (5))
+(chunk '(1 9 6 3 2) 3) ; => '((1 9 6) (3 2))
+(chunk '(8 5 3 2 6) 6) ; => '((8 5 3 2 6))
+(chunk '() 1) ; => '()
