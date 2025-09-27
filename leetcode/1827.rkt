@@ -1,6 +1,18 @@
 #lang racket
 
 (define (min-operations nums)
+  (let loop ((ns nums)
+             (ops 0))
+    (cond ((empty? ns) ops)
+          ((empty? (cdr ns)) (loop (cdr ns) ops))
+          ((<= (second ns)
+               (first ns)) (loop (cons (+ (first ns) 1)
+                                       (cddr ns))
+                                 (+ ops (- (+ (first ns) 1)
+                                           (second ns)))))
+          (else (loop (cdr ns) ops)))))
+
+#;(define (min-operations nums)
   (let ((comp (let loop ((ns nums)
                          (out '()))
                 (cond ((empty? ns) (reverse out))
