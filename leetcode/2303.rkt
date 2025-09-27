@@ -13,11 +13,11 @@
                                     (cons (list (max income-at-bracket 0) rate)
                                           income-rates)))))))
     (foldl
-     (lambda (p acc) (+ acc (* (first p)
-                               (second p))))
+     (lambda (irp acc) (+ acc (* (first irp)
+                               (second irp))))
      0.0
      income-rates)))
 
-(calculate-tax '((3 50) (7 10) (12 25)) 10)
-(calculate-tax '((1 0) (4 25) (5 50)) 2)
-(calculate-tax '((2 50)) 0)
+(calculate-tax '((3 50) (7 10) (12 25)) 10) ; => 2.65
+(calculate-tax '((1 0) (4 25) (5 50)) 2) ; => 0.25
+(calculate-tax '((2 50)) 0) ; => 0.0
