@@ -2,13 +2,13 @@
 
 (define (triangular-sum nums)
   (let ((reduce (lambda (nums)
-                  (let loop ((ns nums) (out '()))
+                  (let loop ((ns nums) (acc '()))
                     (if (empty? (cdr ns))
-                        out
+                        acc
                         (loop (cdr ns)
                               (cons
                                (remainder (+ (car ns) (cadr ns)) 10)
-                               out)))))))
+                               acc)))))))
     (if (empty? (cdr nums))
         (car nums)
         (triangular-sum (reduce nums)))))
