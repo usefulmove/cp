@@ -1,9 +1,9 @@
 class Solution:
     def minFlops(self, a: int, b: int, c: int) -> int:
-        a_bits = f"{a:030b}"
-        b_bits = f"{b:030b}"
-        aorb_bits = f"{a|b:030b}"
-        c_bits = f"{c:030b}"
+        a_bits = f"{a:0>32b}"
+        b_bits = f"{b:0>32b}"
+        aorb_bits = f"{a|b:0>32b}"
+        c_bits = f"{c:0>32b}"
 
         def f(a, b, c, o):
             if o == c:
