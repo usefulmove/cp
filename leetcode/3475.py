@@ -11,9 +11,11 @@ def analyze_dna_patterns(samples: pd.DataFrame) -> pd.DataFrame:
 
 #def analyze_dna_patterns(samples: pd.DataFrame) -> pd.DataFrame:
 #    samples['has_start'] = samples.dna_sequence.str.startswith('ATG').apply(int)
-#    samples['has_stop'] = samples.dna_sequence.str.endswith('TAA').apply(int) + \
-#        samples.dna_sequence.str.endswith('TAG').apply(int) + \
+#    samples['has_stop'] = (
+#        samples.dna_sequence.str.endswith('TAA').apply(int) +
+#        samples.dna_sequence.str.endswith('TAG').apply(int) +
 #        samples.dna_sequence.str.endswith('TGA').apply(int)
+#    )
 #    samples['has_atat'] = samples.dna_sequence.str.contains('ATAT').apply(int)
 #    samples['has_ggg'] = samples.dna_sequence.str.contains('GGG').apply(int)
 #
