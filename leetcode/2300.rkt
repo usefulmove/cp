@@ -9,7 +9,8 @@
                                (let* ((mid (floor (/ (+ left right) 2)))
                                       (val (list-ref sorted-potions mid)))
                                  (cond ((> left right) left) 
-                                       ((>= (* val spell) success) (loop left (- mid 1)))
+                                       ((>= (* val spell) success)
+                                        (loop left (- mid 1)))
                                        (else (loop (+ mid 1) right))))))))
     (map
      (lambda (spell) (- num-potions (find-potions-ind spell)))
