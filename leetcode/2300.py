@@ -3,7 +3,7 @@ class Solution:
         sorted_potions: int = sorted(potions)
         num_potions: int = len(potions)
 
-        def find_potions_ind(spell: int) -> int:
+        def find_potions_ind(spell: int) -> int: # binary search
             left: int = 0
             right: int = num_potions - 1
 
