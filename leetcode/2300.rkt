@@ -24,5 +24,5 @@
       potions))
    spells))
 
-(successful-pairs '(5 1 3) '(1 2 3 4 5) 7)
-(successful-pairs '(3 1 2) '(8 5 8) 16)
+(successful-pairs '(5 1 3) '(1 2 3 4 5) 7) ; '(4 0 3)
+(successful-pairs '(3 1 2) '(8 5 8) 16) ; '(2 0 2)
