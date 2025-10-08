@@ -1,6 +1,14 @@
 #lang racket
 
 (define (num-water-bottles num-bottles num-exchange)
+  (let loop ((empties num-bottles)
+             (drunks num-bottles))
+    (if (>= empties num-exchange)
+        (loop (+ (- empties num-exchange) 1)
+              (+ drunks 1))
+        drunks)))
+
+#;(define (num-water-bottles num-bottles num-exchange)
   (let loop ((fulls num-bottles)
              (empties 0)
              (drunks 0))
@@ -12,5 +20,5 @@
                                            drunks))
           (else drunks))))
 
-(num-water-bottles 9 3)
-(num-water-bottles 15 4)
+(num-water-bottles 9 3) ; => 13
+(num-water-bottles 15 4) ; => 19
