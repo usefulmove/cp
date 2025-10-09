@@ -1,6 +1,23 @@
 #lang racket
 
 (define (find-k-or nums k)
+  (let* ((bits-transposed (apply map list (map
+                                           (lambda (n)
+                                             (let* ((s (number->string n 2))
+                                                    (len (string-length s)))
+                                               (append (make-list (- 32 len) #\0)
+                                                       (string->list s))))
+                                           nums)))
+         (kor-bits (map
+                    (lambda (bs)
+                      (let ((cnt (count
+                                  (lambda (b) (equal? b #\1))
+                                  bs)))
+                        (if (>= cnt k) #\1 #\0)))
+                    bits-transposed)))
+    (string->number (list->string kor-bits) 2)))
+
+#;(define (find-k-or nums k)
   (let* ((bits (map
                 (lambda (n)
                   (let* ((s (number->string n 2))
