@@ -20,12 +20,13 @@
                         (and (code-valid? (list-ref code i))
                              (business-valid? (list-ref business-line i))
                              (list-ref is-active i)))
-                      (range (length code)))))
+                      (range (length code))))
+         (valid-pairs (map
+                       (lambda (i) (cons (list-ref code i)
+                                         (list-ref business-line i)))
+                       valid-inds)))
     (map car (sort
-              (map
-               (lambda (i) (cons (list-ref code i)
-                                 (list-ref business-line i)))
-               valid-inds)
+              valid-pairs
               (lambda (pair-a pair-b)
                 (let ((code-a (car pair-a))
                       (code-b (car pair-b))
@@ -33,8 +34,8 @@
                       (business-b (cdr pair-b)))
                   (if (equal? business-a business-b)
                       (string<? code-a code-b)
-                      (>= (length (member business-a valid-businesses))
-                          (length (member business-b valid-businesses))))))))))
+                      (> (length (member business-a valid-businesses))
+                         (length (member business-b valid-businesses))))))))))
 
 
 (validate-coupons '("SAVE20" "" "PHARMA5" "SAVE@20")
