@@ -1,5 +1,9 @@
 #lang racket
 
+#|
+Iterate through the list, keeping track of two accumulators - one for the length of the currently ongoing Fibonacci sequence and one for the longest Fibonacci sequence seen so far. Reset the ongoing accumulator when the sequence is broken.
+|#
+
 (define (longest-subarray nums)
   (let loop ((xs nums) (acc-ongoing 0) (acc-longest 0))
     (cond ((empty? xs) acc-longest) ; no elements left
@@ -14,8 +18,8 @@
              (loop (cdr xs)
                    updated-acc-ongoing
                    (max acc-longest updated-acc-ongoing))))
-          (else ; three or more and no match - reset ongoing
-           (loop (cdr xs) 0 acc-longest)))))
+          (else ; three or more and no match
+           (loop (cdr xs) 0 acc-longest))))) ; reset ongoing acc.
 
 (longest-subarray '(1 1 1 1 2 3 5 1)) ; => 5
 (longest-subarray '(5 2 7 9 16)) ; => 5
