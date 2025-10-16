@@ -1,21 +1,21 @@
 #lang racket
 
 (define (longest-subarray nums)
-  (let loop ((xs nums) (continuation 0) (longest 0))
-    (cond ((empty? xs) longest)
-          ((empty? (cdr xs)) (max longest 1))
-          ((empty? (cddr xs)) (max longest 2))
+  (let loop ((xs nums) (acc-ongoing 0) (acc-longest 0))
+    (cond ((empty? xs) acc-longest) ; no elements left
+          ((empty? (cdr xs)) (max acc-longest 1)) ; one element left
+          ((empty? (cddr xs)) (max acc-longest 2)) ; two elements left
           ((= (+ (first xs)
                  (second xs))
-              (third xs))
-           (let ((updated-continuation (if (zero? continuation)
-                                           3
-                                           (+ continuation 1))))
+              (third xs)) ; three or more and matches fib pattern
+           (let ((updated-acc-ongoing (if (zero? acc-ongoing)
+                                          3
+                                          (+ acc-ongoing 1))))
              (loop (cdr xs)
-                   updated-continuation
-                   (max longest updated-continuation))))
-          (else
-           (loop (cdr xs) 0 longest)))))
+                   updated-acc-ongoing
+                   (max acc-longest updated-acc-ongoing))))
+          (else ; three or more and no match - reset ongoing
+           (loop (cdr xs) 0 acc-longest)))))
 
 (longest-subarray '(1 1 1 1 2 3 5 1)) ; => 5
 (longest-subarray '(5 2 7 9 16)) ; => 5
