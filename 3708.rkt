@@ -1,7 +1,7 @@
 #lang racket
 
 #|
-Iterate through the list, keeping track of two accumulators - one for the length of the currently ongoing Fibonacci sequence and one for the longest Fibonacci sequence seen so far. Reset the ongoing accumulator when the sequence is broken.
+Iterate recursively through the list of numbers, keeping track of two accumulators - one for the length of the currently ongoing Fibonacci sequence and one for the longest Fibonacci sequence seen so far. Reset the ongoing accumulator when the sequence is broken.
 |#
 
 (define (longest-subarray nums)
