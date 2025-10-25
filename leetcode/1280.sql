@@ -15,7 +15,9 @@ select student_id,
        student_name,
        subject_name,
        count(valid) as attended_exams
-  from cross_exam
- group by student_id,
-          student_name,
-          subject_name
+from cross_exam
+group by student_id,
+         student_name,
+         subject_name
+order by student_id,
+         subject_name
