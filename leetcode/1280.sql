@@ -16,8 +16,6 @@ select student_id,
        subject_name,
        count(valid) as attended_exams
 from cross_exam
-group by student_id,
-         student_name,
-         subject_name
+group by 1, 2, 3
 order by student_id,
          subject_name

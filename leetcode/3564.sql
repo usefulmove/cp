@@ -23,7 +23,7 @@ with season_revenue_sales as (
                    as season_rank
         from season_revenue_sales s
              left join products p on s.product_id = p.product_id
-        group by s.season, p.category)
+        group by 1, 2)
 
 select season,
        category,
