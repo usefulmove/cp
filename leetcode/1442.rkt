@@ -1,0 +1,21 @@
+#lang racket
+
+(define (count-triplets arr)
+  (let ((count 0)
+        (len (length arr))
+        (xor-list (lambda (lst)
+                    (apply bitwise-xor lst)))
+        (sublist (lambda (lst a b (inclusive #f))
+                   (drop (take lst (if inclusive (+ 1 b) b)) a))))
+    (for ((i (range len)))
+      (for ((j (range i len)))
+        (for ((k (range j len)))
+          (when (and (< i j)
+                     (<= j k)
+                     (= (xor-list (sublist arr i j))
+                        (xor-list (sublist arr j k #t))))
+            (set! count (+ 1 count))))))
+    count))
+
+(count-triplets '(2 3 1 6 7))
+(count-triplets '(1 1 1 1 1))
