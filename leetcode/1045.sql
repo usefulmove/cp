@@ -1,4 +1,12 @@
 select customer_id
+from Customer
+group by 1
+having count(distinct product_key) = (select
+                                          count(distinct product_key)
+                                      from Product)
+
+
+select customer_id
 from (select distinct
           customer_id, product_key
       from Customer
