@@ -1,5 +1,5 @@
 fn main () {
-    pub fn alternate_digit_sum(n: i32) -> i32 {
+    fn alternate_digit_sum(n: i32) -> i32 {
         fn recur(n: i32, pol: bool, acc: i32) -> i32 {
             let quo: i32 = n / 10; // quotient
             let rem: i32 = n % 10; // remainder
