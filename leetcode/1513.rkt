@@ -3,7 +3,7 @@
 #|
 Split the string to get only substrings containing continuous 1's. Use the triangular number formula (n(n+1)/2) and the length of each substring to determine the number of sub-substrings with all 1's. Sum all of the substring triangular number totals.
 
-[trangular number](https://en.wikipedia.org/wiki/Triangular_number)
+[triangular number](https://en.wikipedia.org/wiki/Triangular_number)
 |#
 
 (define (num-sub s)
