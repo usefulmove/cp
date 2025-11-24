@@ -1,19 +1,17 @@
+# Iterate through each digit (`(remainder num 10)`) of `n` from right to left and for each non-zero digit, keep track of the sum of digits (`mult`) and the reconstructed number (`base`), and a scaling factor (`m`) used to calculate the reconstructed number at each non-zero step. When a zero digit is encountered, skip it and leave each of the tracked values unchanged. Once the iteration is complete (`(zero? num)`), return the reconstructed base multiplied by the multiplier (digit sum).
+
 class Solution:
     def sumAndMultiply(self, n: int) -> int:
-        if not n:
-            return 0
+        def recur(num, base = 0, m = 1, mult = 0):
 
-        def reduce(m, acc = 0):
-            if not m:
-                return acc
+            if not num:
+                return base * mult
 
-            quot, rem = divmod(m, 10)
+            quot, rem = divmod(num, 10)
 
-            return reduce(quot, acc + rem)
+            if not rem:
+                return recur(quot, base, m, mult)
 
+            return recur(quot, base + rem * m, m * 10, mult + rem)
 
-        base = int(str(n).replace('0', ''))
-
-        mult = reduce(base)
-
-        return base * mult
+        return recur(n)
