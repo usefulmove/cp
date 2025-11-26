@@ -5,14 +5,11 @@ class Solution:
 
         snums = sorted(nums)
         mdif = 100000
-        i = 0
 
-        while i < (len(nums) - k + 1):
+        for i in range(len(nums) - k + 1):
             dif = snums[i + k - 1] - snums[i]
 
             if dif < mdif:
                 mdif = dif
-
-            i += 1
 
         return mdif

@@ -1,11 +1,10 @@
 class Solution:
     def arrayPairSum(self, nums: List[int]) -> int:
         snums = sorted(nums)
-        acc = i = 0
+        acc = 0
 
-        while i < len(nums):
+        for i in range(0, len(nums), 2):
             acc += min(snums[i:i+2])
-            i += 2
 
         return acc
 
@@ -18,4 +17,4 @@ class Solution:
 #
 #            return recur(ns[2:], acc + min(ns[:2]))
 #
-#        return recur(sorted(nums))
+#        return recur(sorted(nums))class Solution:
