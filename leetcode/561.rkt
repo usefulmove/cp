@@ -1,0 +1,10 @@
+(define/contract (array-pair-sum nums)
+(-> (listof exact-integer?) exact-integer?)
+(let ((snums (sort nums <)))
+  (let loop ((sns snums)
+             (acc 0))
+    (if (empty? sns)
+        acc
+        (loop (cddr sns)
+              (+ acc (min (car sns)
+                          (cadr sns))))))))
