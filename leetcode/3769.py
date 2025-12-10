@@ -3,6 +3,4 @@ class Solution:
         def reflect(n):
             return (int(format(f"{n:b}")[::-1]), n)
 
-        outs = sorted(nums, key=reflect)
-
-        return outs
+        return sorted(nums, key=reflect)
