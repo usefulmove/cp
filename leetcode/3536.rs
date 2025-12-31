@@ -1,3 +1,8 @@
+/**
+ Iterate through the digits of N and keep track of the two largest
+ digits, then return their product.
+ **/
+
 struct Solution {}
 
 impl Solution {
