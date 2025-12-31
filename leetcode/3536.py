@@ -5,8 +5,8 @@ class Solution:
     def maxProduct(n: int) -> int:
         def recur(num: int, a: int = 0, b: int = 0) -> int:
             """
-            Iterate through the digits of NUM and keep track of the two largest
-            digits then return their product.
+            Iterate through the digits of NUM and keep track of the
+            two largest digits then return their product.
             """
             if num == 0:
                 return a * b
