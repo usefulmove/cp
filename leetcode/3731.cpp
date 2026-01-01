@@ -1,6 +1,6 @@
 class Solution {
-public:
-    vector<int> findMissingElements(vector<int>& nums) {
+  public:
+    vector<int> findMissingElements(vector<int> &nums) {
         vector<int> out;
 
         auto min = std::min_element(nums.begin(), nums.end());
