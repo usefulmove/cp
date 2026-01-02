@@ -4,10 +4,7 @@ class Solution {
         int n = nums.size() >> 1;
 
         for (int num : nums) {
-            auto filtered =
-                nums | views::filter([num](int elem) { return elem == num; });
-
-            if (ranges::distance(filtered) == n) {
+            if ((ranges::count(nums, num)) == n) {
                 return num;
             }
         }
