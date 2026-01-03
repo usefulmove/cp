@@ -4,17 +4,20 @@
 
 class Solution {
   public:
-    vector<int> findMissingElements(vector<int> &nums) {
-        vector<int> out;
+    std::vector<int> findMissingElements(std::vector<int> &nums) {
+        std::vector<int> out;
 
-        auto min = min_element(nums.begin(), nums.end());
-        auto max = max_element(nums.begin(), nums.end());
+        const auto min = std::min_element(nums.begin(), nums.end());
+        const auto max = std::max_element(nums.begin(), nums.end());
 
-        for (int num : views::iota(*min, *max + 1)) {
-            if (find(nums.begin(), nums.end(), num) == nums.end()) {
-                out.push_back(num);
+        out = std::ranges::fold_left(std::views::iota(*min, *max + 1), out, [&nums](std::vector<int> acc, int num) {
+            if (std::find(nums.begin(), nums.end(), num) == nums.end()) {
+                acc.push_back(num);
+                return acc;
             }
-        }
+
+            return acc;
+        });
 
         return out;
     }
