@@ -9,16 +9,13 @@ class Solution {
         const auto [min, max] = std::ranges::minmax(nums);
 
         return std::ranges::fold_left(
-            std::views::iota(min, max + 1),
-            out,
+            std::views::iota(min, max + 1), out,
             [&nums](std::vector<int> acc, int num) {
-                if (std::find(nums.begin(), nums.end(), num) == nums.end()) {
+                if (!std::ranges::contains(nums, num)) {
                     acc.push_back(num);
                 }
-
                 return acc;
-            }
-        );
+            });
     }
 };
 
