@@ -3,7 +3,7 @@
 class Solution {
   public:
     int getLeastFrequentDigit(int n) {
-        std::array<int, 10> cnts = { 0 };
+        std::array<int, 10> cnts = {0};
 
         while (n > 0) {
             int digit = n % 10;
