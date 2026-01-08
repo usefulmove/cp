@@ -5,7 +5,7 @@ class Solution {
                                   int drunks) -> int {
             if (empties >= numExchange)
                 return self(empties - numExchange + 1, drunks + 1);
-            
+
             return drunks;
         };
 
