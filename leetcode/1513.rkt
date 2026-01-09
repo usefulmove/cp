@@ -1,21 +1,20 @@
 #lang racket
 
 #|
-Split the string to get only substrings containing continuous 1's. Use the triangular number formula (n(n+1)/2) and the length of each substring to determine the number of sub-substrings with all 1's. Sum all of the substring triangular number totals.
+Uses [triangular numbers](https://en.wikipedia.org/wiki/Triangular_number) on the lengths of contiguous ones to accumulate the total number of substrings.
+ |#
 
-[triangular number](https://en.wikipedia.org/wiki/Triangular_number)
-|#
 
-(define (num-sub s)
-  (let ((tng (lambda (n)
-               (/ (* n (+ n 1)) 2))))
+(define/contract (num-sub s)
+  (-> string? exact-integer?)
+  (let ((contiguous-ones (map string-length (string-split s "0")))
+        (triangular (lambda (a) (/ (* a (+ a 1)) 2))))
     (foldl
-     (lambda (ones acc)
-       (modulo
-        (+ acc (tng (string-length ones)))
-        1000000007))
+     (lambda (ones count)
+       (modulo (+ count (triangular ones)) 1000000007))
      0
-     (string-split s "0"))))
+     contiguous-ones)))
+
 
 (num-sub "0110111") ; => 9
 (num-sub "101")     ; => 2
