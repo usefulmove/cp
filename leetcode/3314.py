@@ -14,5 +14,5 @@ class Solution:
 
 solution = Solution()
 
-print(f"{solution.minBitwiseArray([2,3,5,7])= }")  # [-1, 1, 4, 3]
-print(f"{solution.minBitwiseArray([11,13,31])= }") # [9, 12, 15]
+print(f"{solution.minBitwiseArray([2,3,5,7]) = }")  # [-1, 1, 4, 3]
+print(f"{solution.minBitwiseArray([11,13,31]) = }") # [9, 12, 15]
