@@ -12,8 +12,8 @@ class Solution:
             i += 1
             j -= 1
 
-
         return max_pair_sum
+
 
 #    def minPairSum(self, nums: List[int]) -> int:
 #        snums = sorted(nums)
