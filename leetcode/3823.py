@@ -6,14 +6,10 @@ class Solution:
             partition[c.isalpha()].append(c)
 
         chars, letters = partition
-        rletters = reversed(letters)
-        rchars = reversed(chars)
+        rletters_iter = reversed(letters)
+        rchars_iter = reversed(chars)
 
-        out = ""
-        for c in s:
-            if c.isalpha():
-                out = out + next(rletters)
-            else:
-                out = out + next(rchars)
-
-        return out
+        return "".join(
+            next(rletters_iter) if c.isalpha() else next(rchars_iter)
+            for c in s
+        )
