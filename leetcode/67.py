@@ -4,7 +4,7 @@ class Solution:
 
         def recur(sa: str, sb: str, acc: str = "", carry: str = "0"):
             if not sa:
-                out = acc[::-1].lstrip('0')
+                out = acc.rstrip('0')
                 return out if out else "0"
 
             bit_a, *rest_a = sa
@@ -24,7 +24,7 @@ class Solution:
 
             return recur(rest_a, rest_b, acc + bit, carry)
 
-        return recur(reversed(a.zfill(n)), reversed(b.zfill(n)))
+        return recur(a.zfill(n)[::-1], b.zfill(n)[::-1])[::-1]
 
 ans = Solution()
 print(f"{ans.addBinary("11", "1") = }")      # => "100"
