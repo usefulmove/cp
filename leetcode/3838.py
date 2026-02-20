@@ -4,7 +4,7 @@ class Solution:
             return sum( weights[ord(c) - 97] for c in word ) % 26
 
         def reverse_lookup(i: int) -> str:
-            return chr((25 - i) + 97)
+            return chr(25 - i + 97)
 
         chars: List[str] = (
             reverse_lookup(calculate_weight(word)) for word in words
