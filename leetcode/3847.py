@@ -6,7 +6,7 @@ class Solution:
         for i, game in enumerate(nums):
             if 0 == (i + 1) % 6:
                 one_active = not one_active
-            if game % 2 == 1: # odd
+            if 1 == game % 2: # odd
                 one_active = not one_active
             score_diff += game if one_active else -game
 
