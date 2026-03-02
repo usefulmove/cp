@@ -4,6 +4,8 @@ class Solution:
             if not ns:
                 return out
 
-            return swapPos(ns[2:], out + [ns[1]] + [ns[0]])
+            a, b, *rest = ns
+
+            return swapPos(rest, out + [b] + [a])
 
         return swapPos(sorted(nums))
