@@ -1,6 +1,6 @@
-(define (hamming-weight n (cnt 0))
+(define (hamming-weight n (ones 0))
   (if (zero? n)
-      cnt
+      ones
       (hamming-weight
        (arithmetic-shift n -1)
-       (+ cnt (bitwise-and n 1)))))
+       (+ ones (bitwise-and n 1)))))
