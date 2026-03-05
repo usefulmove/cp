@@ -1,20 +1,35 @@
 class Solution:
     def minOperations(self, s: str) -> int:
-        def compare(
-            comp: str,
-            pattern: bool = True,
-            cnt: int = 0,
-        ) -> int:
-            if not comp:
-                return min(cnt, len(s) - cnt)
-            bit_bool = bool(int(comp[0]))
-            return compare(
-                comp[1:],
-                not pattern,
-                cnt + bool(bit_bool == pattern),
-            )
+        n = len(s)
 
-        return compare(s)
+        cnt = 0
+        pattern = True
+
+        while s:
+            cnt += bool(int(s[0])) == pattern
+            pattern = not pattern
+            s = s[1:]
+
+        return min(cnt, n - cnt)
+
+
+#class Solution:
+#    def minOperations(self, s: str) -> int:
+#        def compare(
+#            comp: str,
+#            pattern: bool = True,
+#            cnt: int = 0,
+#        ) -> int:
+#            if not comp:
+#                return min(cnt, len(s) - cnt)
+#            bit_bool = bool(int(comp[0]))
+#            return compare(
+#                comp[1:],
+#                not pattern,
+#                cnt + bit_bool == pattern,
+#            )
+#
+#        return compare(s)
 
 
 #class Solution:
