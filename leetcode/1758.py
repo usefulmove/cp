@@ -6,9 +6,10 @@ class Solution:
         pattern = True
 
         while s:
-            cnt += bool(int(s[0])) == pattern
-            pattern = not pattern
+            if bool(int(s[0])) == pattern:
+                cnt += 1
             s = s[1:]
+            pattern = not pattern
 
         return min(cnt, n - cnt)
 
