@@ -2,12 +2,12 @@ class Solution:
     def minimumIndex(self, capacity: list[int], itemSize: int) -> int:
         residual_capacities = [c-itemSize for c in capacity]
 
-        idx = -1
-        minimum_capacity = 101
+        min_idx = -1
+        min_cap = 101
         for i, cap in enumerate(residual_capacities):
             if cap < 0:
                 continue
-            if cap < minimum_capacity:
-                idx, minimum_capacity = i, cap
+            if cap < min_cap:
+                min_idx, min_cap = i, cap
         
-        return idx
+        return min_idx
