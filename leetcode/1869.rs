@@ -1,9 +1,20 @@
 impl Solution {
     pub fn check_zero_ones(s: String) -> bool {
-        let longest = |sep| s.split(sep).map(str::len).max();
+        let longest = |sep| s.split(sep).fold(
+            0,
+            |acc, seg| acc.max(seg.len())
+        );
         longest('0') > longest('1')
     }
 }
+
+
+//impl Solution {
+//    pub fn check_zero_ones(s: String) -> bool {
+//        let longest = |sep| s.split(sep).map(str::len).max();
+//        longest('0') > longest('1')
+//    }
+//}
 
 
 //impl Solution {
