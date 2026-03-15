@@ -1,6 +1,20 @@
 class Solution:
     def countCommas(self, n: int) -> int:
-        return len([1 for a in range(n + 1) if a > 999])
+        if n < 1000:
+            return 0
+        return n - 999
+
+
+#class Solution:
+#    def countCommas(self, n: int) -> int:
+#        if n < 1000:
+#            return 0
+#        return len(range(1000, n + 1))
+
+
+#class Solution:
+#    def countCommas(self, n: int) -> int:
+#        return len([1 for a in range(n + 1) if a > 999])
 
 
 #class Solution:
