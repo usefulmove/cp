@@ -1,12 +1,8 @@
 class Solution:
     def minimumAverage(self, nums: List[int]) -> float:
-        middle = len(nums) // 2
+        n = len(nums)
         snums = sorted(nums)
-        lows = snums[:middle][::-1]
-        highs = snums[middle:]
-
-        sums = []
-        while lows:
-            sums.append(lows.pop() + highs.pop())
-
-        return min(sums) / 2
+        minsum = 100
+        for i in range(n // 2):
+            minsum = min(minsum, snums[i] + snums[n-i-1])
+        return minsum / 2
