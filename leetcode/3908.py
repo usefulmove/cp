@@ -1,6 +1,4 @@
 class Solution:
-    def firstStableIndex(self, nums: list[int], k: int) -> int:
-        for i in range(len(nums)):
-            if max(nums[:i+1]) - min(nums[i:]) <= k:
-                return i
-        return -1
+    def validDigit(self, n: int, x: int) -> bool:
+        sn, sx = map(str, [n, x])
+        return sn[0] != sx and sx in sn
