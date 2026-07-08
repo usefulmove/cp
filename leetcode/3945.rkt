@@ -1,0 +1,5 @@
+(define/contract (digit-frequency-score n)
+  (-> exact-integer? exact-integer?)
+  (let ((cs (string->list (number->string n)))
+        (char->value (lambda (c) (- (char->integer c) 48))))
+    (apply + (map char->value cs))))
