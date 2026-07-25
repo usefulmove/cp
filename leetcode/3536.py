@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 class Solution:
     def maxProduct(self, n: int) -> int:
         return self.recur(n)
@@ -22,6 +21,12 @@ class Solution:
                 return self.recur(quotient, digit, b)
             case _:
                 return self.recur(quotient, a, b)
+
+
+# class Solution:
+#     def maxProduct(self, n: int) -> int:
+#         cs = sorted(str(n), reverse=True)[:2]
+#         return math.prod(int(c) for c in cs)
 
 
 s = Solution()
