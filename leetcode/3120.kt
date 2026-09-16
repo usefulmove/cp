@@ -1,7 +1,6 @@
 class Solution {
     fun numberOfSpecialChars(word: String): Int {
-        val lowers = word.filter({ it == it.lowercaseChar() })
-        val matchingUppers = lowers.filter({ it.uppercaseChar() in word })
-        return matchingUppers.toList().distinct().size
+        val cs = word.toList().distinct().filter({ it == it.lowercaseChar() })
+        return cs.filter({ it.uppercaseChar() in word }).size
     }
 }
