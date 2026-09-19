@@ -9,9 +9,8 @@ class Solution {
     }
 
     fun counter(s: String): Map<Char, Int> {
-        var m: MutableMap<Char, Int> = mutableMapOf()
-        for (c in s)
-            m[c] = m.getOrDefault(c, 0) + 1
+        var m = mutableMapOf<Char, Int>()
+        for (c in s) m[c] = m.getOrDefault(c, 0) + 1
         return m
     }
 }
