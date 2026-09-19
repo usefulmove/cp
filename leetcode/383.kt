@@ -3,17 +3,17 @@ class Solution {
         val rCounts: Map<Char, Int> = counter(ransomNote)
         val mCounts: Map<Char, Int> = counter(magazine)
     
-        for (c in rCounts.keys) {
+        for (c in rCounts.keys)
             if (rCounts.getOrDefault(c, 0) > mCounts.getOrDefault(c, 0))
                 return false
-        }
 
         return true
     }
 
     fun counter(s: String): Map<Char, Int> {
         var m: MutableMap<Char, Int> = mutableMapOf()
-        for (c in s) m[c] = m.getOrDefault(c, 0) + 1
+        for (c in s)
+            m[c] = m.getOrDefault(c, 0) + 1
         return m
     }
 }
