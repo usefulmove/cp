@@ -8,13 +8,10 @@ class Solution {
         val counts = words.groupingBy { it }
                           .eachCount()
 
-        val e: Map.Entry<String, Int> =
-            counts.asIterable()
-                  .fold(mapOf("" to 0).entries.first()) {
-                      acc: Map.Entry<String, Int>, entry: Map.Entry<String, Int> ->
-                          if (entry.value > acc.value) entry else acc
-                  }
+        val (mostCommonWord, _) = counts.asIterable()
+            .fold( mapOf("" to 0).entries.first() )
+                { acc, entry -> if (entry.value > acc.value) entry else acc }
 
-        return e.key
+        return mostCommonWord
     }
 }
