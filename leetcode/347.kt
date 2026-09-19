@@ -5,9 +5,9 @@ class Solution {
         for (n in nums)
             cnts[n] = cnts.getOrDefault(n, 0) + 1
 
-        return cnts.toList() // List<Pair<Int, Int>>
-                   .sortedByDescending { it.second }
-                   .map { it.first }
+        return cnts.toList()
+                   .sortedByDescending { (_, count) -> count }
+                   .map { (num, _) -> num }
                    .take(k)
                    .toIntArray()
     }
