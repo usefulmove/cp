@@ -8,7 +8,7 @@ class Solution {
                                   .eachCount() 
                                   .maxByOrNull { it.value }
 
-        return if (mostCommon != null) mostCommon.key else ""
+        return mostCommon?.key ?: "" // if (mostCommon != null) mostCommon.key else ""
     }
 }
 
