@@ -1,6 +1,21 @@
 class Solution {
     fun mostCommonWord(paragraph: String, banned: Array<String>): String {
         val delims = "!?',;. ".toCharArray()
+        val mostCommon = paragraph.lowercase()
+                                  .split(*delims)
+                                  .filterNot { it.isEmpty() || it in banned }
+                                  . groupingBy { it }
+                                  .eachCount() 
+                                  .maxByOrNull { it.value }
+
+        return if (mostCommon != null) mostCommon.key else ""
+    }
+}
+
+/*
+class Solution {
+    fun mostCommonWord(paragraph: String, banned: Array<String>): String {
+        val delims = "!?',;. ".toCharArray()
         val words = paragraph.lowercase()
                              .split(*delims)
                              .filterNot { it.isEmpty() || it in banned }
@@ -15,3 +30,4 @@ class Solution {
         return mostCommonWord
     }
 }
+ */
