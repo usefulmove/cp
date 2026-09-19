@@ -2,11 +2,9 @@ class Solution {
     fun canConstruct(ransomNote: String, magazine: String): Boolean {
         val rCounts: Map<Char, Int> = counter(ransomNote)
         val mCounts: Map<Char, Int> = counter(magazine)
-    
         for (c in rCounts.keys)
             if (rCounts.getOrDefault(c, 0) > mCounts.getOrDefault(c, 0))
                 return false
-
         return true
     }
 
