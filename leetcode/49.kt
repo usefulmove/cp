@@ -7,11 +7,9 @@ class Solution {
             map[key] = map.getOrDefault(key, listOf()) + str
         }
 
-        val out: MutableList<List<String>> = mutableListOf(listOf())
-        for (key in map.keys) {
+        val out: MutableList<List<String>> = mutableListOf()
+        for (key in map.keys)
             out.add(map[key]!!)
-        }
-        
-        return out.toList().filter { !it.isEmpty() }
+        return out
     }
 }
