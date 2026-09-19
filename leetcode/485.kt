@@ -1,7 +1,11 @@
 class Solution {
     fun findMaxConsecutiveOnes(nums: IntArray): Int {
-        val ones: List<String> = nums.joinToString("").split("0")
-        return ones.map({ it.length }).maxOrNull()!!
+        val ones: List<String> = nums
+            .joinToString("")
+            .split("0")
+        return ones
+            .map({ it.length })
+            .maxOrNull()!!
     }
 
     /*
