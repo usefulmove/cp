@@ -2,10 +2,11 @@ object MatchingBrackets {
     fun isValid(input: String): Boolean {
         if (input.isEmpty()) return true
 
-        val cleaned = input.filter { it in "(){}[]" }
-                           .replace("()", "")
-                           .replace("{}", "")
-                           .replace("[]", "")
+        val cleaned = input
+            .filter { it in "(){}[]" }
+            .replace("()", "")
+            .replace("{}", "")
+            .replace("[]", "")
 
         if (cleaned == input) return false
 
