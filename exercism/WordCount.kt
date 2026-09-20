@@ -1,13 +1,12 @@
 object WordCount {
-    fun phrase(phrase: String): Map<String, Int> {
-        val delims = "\n\t:!., &@$%^&".toCharArray()
+    val delims = "\n\t:!., &@$%^".toCharArray()
 
-        return phrase
+    fun phrase(phrase: String): Map<String, Int> =
+        phrase
             .lowercase()
             .split(*delims)
             .filterNot { it.isEmpty() }
             .map { it.trim('\'') }
             .groupingBy { it }
             .eachCount()
-    }
 }
