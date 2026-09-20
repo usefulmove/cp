@@ -1,6 +1,5 @@
 class Solution {
-    fun digitFrequencyScore(n: Int): Int =
-        n.toString().fold(0) {acc, c -> acc + c.digitToInt()}
+    fun digitFrequencyScore(n: Int): Int = n.toString().fold(0) { acc, c -> acc + c.digitToInt() }
 }
 
 /*

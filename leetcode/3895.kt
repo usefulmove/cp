@@ -1,5 +1,8 @@
 class Solution {
-    fun countDigitOccurrences(nums: IntArray, digit: Int): Int {
+    fun countDigitOccurrences(
+        nums: IntArray,
+        digit: Int,
+    ): Int {
         val compare = digit.toString()[0]
         var cnt = 0
         for (n in nums) {

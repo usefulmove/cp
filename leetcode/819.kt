@@ -1,13 +1,17 @@
 class Solution {
-    fun mostCommonWord(paragraph: String, banned: Array<String>): String {
+    fun mostCommonWord(
+        paragraph: String,
+        banned: Array<String>,
+    ): String {
         val delims = "!?',;. ".toCharArray()
-        val mostCommon = paragraph
-            .lowercase()
-            .split(*delims)
-            .filterNot { it.isEmpty() || it in banned }
-            . groupingBy { it }
-            .eachCount() 
-            .maxByOrNull { it.value }
+        val mostCommon =
+            paragraph
+                .lowercase()
+                .split(*delims)
+                .filterNot { it.isEmpty() || it in banned }
+                .groupingBy { it }
+                .eachCount()
+                .maxByOrNull { it.value }
 
         return mostCommon?.key ?: "" // if (mostCommon != null) mostCommon.key else ""
     }

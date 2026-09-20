@@ -1,10 +1,15 @@
 class Solution {
-    fun canConstruct(ransomNote: String, magazine: String): Boolean {
+    fun canConstruct(
+        ransomNote: String,
+        magazine: String,
+    ): Boolean {
         val rCounts: Map<Char, Int> = counter(ransomNote)
         val mCounts: Map<Char, Int> = counter(magazine)
-        for (c in rCounts.keys)
-            if (rCounts.getOrDefault(c, 0) > mCounts.getOrDefault(c, 0))
+        for (c in rCounts.keys) {
+            if (rCounts.getOrDefault(c, 0) > mCounts.getOrDefault(c, 0)) {
                 return false
+            }
+        }
         return true
     }
 
@@ -32,7 +37,7 @@ class Solution {
 class Solution {
     fun canConstruct(ransomNote: String, magazine: String): Boolean {
         if (ransomNote.isEmpty()) return true
-        
+
         val c: Char = ransomNote[0]
         val rest: String = ransomNote.drop(1)
 

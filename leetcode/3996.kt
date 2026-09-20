@@ -1,5 +1,8 @@
 class Solution {
-    fun canReach(start: IntArray, target: IntArray): Boolean {
+    fun canReach(
+        start: IntArray,
+        target: IntArray,
+    ): Boolean {
         fun isBlack(pos: IntArray): Boolean {
             val (row, col) = pos
             return (row + col) % 2 == 0

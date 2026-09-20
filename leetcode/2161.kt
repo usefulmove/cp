@@ -1,5 +1,8 @@
 class Solution {
-    fun pivotArray(nums: IntArray, pivot: Int): IntArray {
+    fun pivotArray(
+        nums: IntArray,
+        pivot: Int,
+    ): IntArray {
         val less = nums.filter({ it < pivot })
         val equal = nums.filter({ it == pivot })
         val greater = nums.filter({ it > pivot })

@@ -1,6 +1,10 @@
 class Solution {
-    fun topKFrequent(nums: IntArray, k: Int): IntArray =
-        nums.asIterable()
+    fun topKFrequent(
+        nums: IntArray,
+        k: Int,
+    ): IntArray =
+        nums
+            .asIterable()
             .groupingBy { it }
             .eachCount()
             .entries

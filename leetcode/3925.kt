@@ -1,4 +1,3 @@
 class Solution {
-    fun concatWithReverse(nums: IntArray): IntArray =
-        nums + nums.reversed()
+    fun concatWithReverse(nums: IntArray): IntArray = nums + nums.reversed()
 }
