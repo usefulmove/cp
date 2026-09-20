@@ -3,9 +3,9 @@ class Solution {
         nums: IntArray,
         pivot: Int,
     ): IntArray {
-        val less = nums.filter({ it < pivot })
-        val equal = nums.filter({ it == pivot })
-        val greater = nums.filter({ it > pivot })
+        val less = nums.filter { it < pivot }
+        val equal = nums.filter { it == pivot }
+        val greater = nums.filter { it > pivot }
         return (less + equal + greater).toIntArray()
     }
 }

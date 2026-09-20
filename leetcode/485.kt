@@ -5,7 +5,7 @@ class Solution {
                 .joinToString("")
                 .split("0")
         return ones
-            .map({ it.length })
+            .map { it.length }
             .maxOrNull()!!
     }
 
