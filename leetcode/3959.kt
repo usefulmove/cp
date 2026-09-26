@@ -34,6 +34,17 @@ class Solution {
 
 class Solution {
     fun checkGoodInteger(n: Int): Boolean {
+        val digits = n.digits()
+        val digitSum = digits.sum()
+        val squareSum = digits.fold(0) { acc, n -> acc + n * n }
+        return squareSum - digitSum >= 50
+    }
+    tailrec fun Int.digits(digs: List<Int> = listOf()): List<Int> =
+        if (this == 0) digs else (this / 10).digits(digs + (this % 10))
+}
+
+class Solution {
+    fun checkGoodInteger(n: Int): Boolean {
         val digits = getDigits(n)
         val digitSum = digits.sum()
         val squareSum = digits.fold(0) { acc, n -> acc + n * n }
