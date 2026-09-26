@@ -1,18 +1,16 @@
 class Solution {
     fun maxPairStrength(nums: IntArray): Long {
-        var maxStrength = 0L
+        var maxStrength = 0.0
         for (i in nums.indices) {
-            for (j in nums.indices) {
-                if (i < j) {
-                    val a = nums[i].toDouble()
-                    val b = nums[j].toDouble()
-                    val gcdSquared = gcd(a, b).pow(2.0)
-                    val strength: Double = a * b / gcdSquared
-                    maxStrength = max(strength.toLong(), maxStrength)
-                }
+            for (j in i + 1 until nums.size) {
+                val a = nums[i].toDouble()
+                val b = nums[j].toDouble()
+                val g = gcd(a, b)
+                val strength = (a * b) / (g * g)
+                maxStrength = max(strength, maxStrength)
             }
         }
-        return maxStrength
+        return maxStrength.toLong()
     }
     tailrec fun gcd(a: Double, b: Double): Double =
         if (b == 0.0) a else gcd(b, a % b)
