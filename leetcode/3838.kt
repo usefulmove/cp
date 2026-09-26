@@ -12,8 +12,8 @@ class Solution {
 
     fun Char.toIndex(): Int = this.toInt() - 'a'.toInt()
 
-    fun reverseAlphabetLookup(weight: Int): String {
+    fun reverseAlphabetLookup(weight: Int): Char {
         val index = 25 - weight % 26
-        return (index + 'a'.toInt()).toChar().toString()
+        return (index + 'a'.toInt()).toChar()
     }
 }
