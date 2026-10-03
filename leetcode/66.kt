@@ -1,5 +1,19 @@
 class Solution {
     fun plusOne(digits: IntArray): IntArray {
+       for (i in digits.lastIndex downTo 0) {
+            if (digits[i] < 9) {
+                digits[i] += 1
+                return digits // short circuit
+            }
+            digits[i] = 0
+        }
+        return intArrayOf(1) + digits
+    }
+}
+
+/*
+class Solution {
+    fun plusOne(digits: IntArray): IntArray {
         val digs = digits.toMutableList()
 
         for (i in digs.indices.reversed()) {
@@ -14,7 +28,6 @@ class Solution {
     }
 }
 
-/*
 class Solution {
     fun plusOne(digits: IntArray): IntArray {
         var carry: Boolean = true
