@@ -16,21 +16,18 @@ class Solution {
         }
         val (bit: Char, nextCarry: Boolean) =
             when (
-                Triple(
-                    sOne[0],
-                    sTwo[0],
-                    if (carry) '1' else '0',
-                )
+                val cnt =
+                    listOf(
+                        sOne[0].toString().toInt(),
+                        sTwo[0].toString().toInt(),
+                        if (carry) 1 else 0,
+                    ).sum()
             ) {
-                Triple('0', '0', '0') -> Pair('0', false)
-                Triple('1', '0', '0') -> Pair('1', false)
-                Triple('0', '1', '0') -> Pair('1', false)
-                Triple('0', '0', '1') -> Pair('1', false)
-                Triple('1', '0', '1') -> Pair('0', true)
-                Triple('0', '1', '1') -> Pair('0', true)
-                Triple('1', '1', '0') -> Pair('0', true)
-                Triple('1', '1', '1') -> Pair('1', true)
-                else -> error("unreachable")
+                0 -> Pair('0', false)
+                1 -> Pair('1', false)
+                2 -> Pair('0', true)
+                3 -> Pair('1', true)
+                else -> throw Exception("unreachable: $cnt")
             }
         return loop(
             sOne.slice(1..sOne.lastIndex),
