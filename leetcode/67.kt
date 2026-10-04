@@ -1,7 +1,8 @@
 class Solution {
     fun addBinary(a: String, b: String): String {
-        if (a.length > b.length) return addBinary(a, "0" + b)
-        if (a.length < b.length) return addBinary("0" + a, b)
+        val pad: String = "0".repeat(abs(a.length - b.length))
+        if (a.length > b.length) return addBinary(a, pad + b)
+        if (a.length < b.length) return addBinary(pad + a, b)
         return loop(a.reversed(), b.reversed()).reversed()
     }
 
@@ -15,13 +16,12 @@ class Solution {
             return if (carry) acc + '1' else acc
         }
         val (bit: Char, nextCarry: Boolean) =
-            when (
-                val cnt =
-                    listOf(
-                        sOne[0].toString().toInt(),
-                        sTwo[0].toString().toInt(),
-                        if (carry) 1 else 0,
-                    ).sum()
+            when ( val cnt =
+                listOf(
+                    sOne[0].toString().toInt(),
+                    sTwo[0].toString().toInt(),
+                    if (carry) 1 else 0,
+                ).sum()
             ) {
                 0 -> Pair('0', false)
                 1 -> Pair('1', false)
