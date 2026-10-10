@@ -6,7 +6,11 @@ class Solution {
         out.add(nums[0])
 
         for (i in 1..<nums.lastIndex) {
-            if ((0..<i).all { nums[i] > nums[it] } || ((i+1)..nums.lastIndex).all { nums[i] > nums[it] })
+            if (
+                (0..<i).all { nums[i] > nums[it] }
+                ||
+                ((i+1)..nums.lastIndex).all { nums[i] > nums[it] }
+            )
                 out.add(nums[i])
         }
 
