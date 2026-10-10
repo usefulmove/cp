@@ -1,7 +1,8 @@
 class Solution {
     fun minimumPrefixLength(nums: IntArray): Int {
         val strictSize =
-            nums.toList()
+            nums
+                .toList()
                 .zipWithNext()
                 .map { it.first < it.second }
                 .reversed()
