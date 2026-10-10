@@ -1,4 +1,16 @@
 class Solution {
+    fun countDigitOccurrences(nums: IntArray, digit: Int): Int =
+        nums
+            .flatMap { num ->
+                num
+                    .toString()
+                    .toList()
+                    .map { c -> c.toString().toInt() }
+            }.count { digit == it }
+}
+
+/*
+class Solution {
     fun countDigitOccurrences(
         nums: IntArray,
         digit: Int,
@@ -13,3 +25,4 @@ class Solution {
         return cnt
     }
 }
+ */
