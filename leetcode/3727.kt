@@ -9,3 +9,23 @@ class Solution {
         return sumOfSquares(bigs) - sumOfSquares(smalls)
     }
 }
+
+/*
+class Solution {
+    fun maxAlternatingSum(nums: IntArray): Long {
+        val snums: List<Int> = nums.sortedByDescending { abs(it) }
+        tailrec fun loop(xs: List<Int>, ind: Int = 0, acc: Long = 0L): Long {
+            if (xs.isEmpty()) return acc
+            if (ind % 2 == 0) {
+                val x = xs.first()
+                return loop(xs.drop(1), ind + 1, acc + x * x)
+            } else {
+                val x = xs.last()
+                return loop(xs.dropLast(1), ind + 1, acc - x * x)
+            }
+        }
+        val res = loop(snums)
+        return res
+    }
+}
+ */
