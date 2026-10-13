@@ -1,5 +1,18 @@
 class Solution {
     fun maxAlternatingSum(nums: IntArray): Long {
+        val snums: List<Int> = nums.sortedByDescending { abs(it) }
+        val half = (nums.size + 1) / 2
+        val bigs = snums.slice(0..<half)
+        val smalls = snums.slice(half..snums.lastIndex)
+        fun List<Int>.sumSquares(): Long =
+            this.fold(0L) { acc, a -> acc + a * a }
+        return bigs.sumSquares() - smalls.sumSquares()
+    }
+}
+
+/*
+class Solution {
+    fun maxAlternatingSum(nums: IntArray): Long {
         val sumOfSquares = fun (ns: List<Int>): Long =
             ns.fold(0L) { acc, n -> acc + n * n }
         val snums: List<Int> = nums.sortedByDescending { abs(it) }
@@ -10,7 +23,6 @@ class Solution {
     }
 }
 
-/*
 class Solution {
     fun maxAlternatingSum(nums: IntArray): Long {
         val snums: List<Int> = nums.sortedByDescending { abs(it) }
